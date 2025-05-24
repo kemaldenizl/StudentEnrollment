@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DataAccess\Abstract\" />
     <Folder Include="DataAccess\Concrete\EntityFramework\" />
   </ItemGroup>
 
