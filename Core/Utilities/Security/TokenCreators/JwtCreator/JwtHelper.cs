@@ -56,5 +56,10 @@ namespace Core.Utilities.Security.TokenCreators.JwtCreator
 			);
 			return jwt;
 		}
+
+		public AccessToken CreateToken(TUser user, List<TOperationClaim> operationClaims)
+		{
+
+		}
 	}
 }
