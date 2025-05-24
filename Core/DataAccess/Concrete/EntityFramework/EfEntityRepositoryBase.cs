@@ -23,7 +23,10 @@ namespace Core.DataAccess.Concrete.EntityFramework
 
 		public TEntity Get(Expression<Func<TEntity, bool>> filter)
 		{
-			throw new NotImplementedException();
+			using (TContext context = new TContext())
+			{
+				return context.Set<TEntity>().SingleOrDefault(filter);
+			}
 		}
 
 		public void Add(TEntity entity)
