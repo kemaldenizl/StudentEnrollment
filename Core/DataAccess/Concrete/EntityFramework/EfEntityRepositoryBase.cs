@@ -51,7 +51,12 @@ namespace Core.DataAccess.Concrete.EntityFramework
 
 		public void Delete(TEntity entity)
 		{
-			throw new NotImplementedException();
+			using (TContext context = new TContext())
+			{
+				var deletedEntity = context.Entry(entity);
+				deletedEntity.State = EntityState.Deleted;
+				context.SaveChanges();
+			}
 		}
 	}
 }
