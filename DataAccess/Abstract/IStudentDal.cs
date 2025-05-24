@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
 {
 	public interface IStudentDal : IEntityRepository<Student>
 	{
+		List<OperationClaim> GetClaims(Student student);
 	}
 }
