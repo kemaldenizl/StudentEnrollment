@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Utilities.Security.Encryption;
 
 namespace Core.Utilities.Security.TokenCreators.JwtCreator
 {
@@ -59,7 +60,7 @@ namespace Core.Utilities.Security.TokenCreators.JwtCreator
 
 		public AccessToken CreateToken(TUser user, List<TOperationClaim> operationClaims)
 		{
-
+			var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
 		}
 	}
 }
