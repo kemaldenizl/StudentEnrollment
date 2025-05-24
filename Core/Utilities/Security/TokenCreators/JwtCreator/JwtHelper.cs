@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Abstract;
+using Core.Extensions;
 using Core.Utilities.Security.TokenEntities;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -31,6 +32,14 @@ namespace Core.Utilities.Security.TokenCreators.JwtCreator
 			var email = typeof(TUser).GetProperty("Email")?.GetValue(user)?.ToString();
 			var firstname = typeof(TUser).GetProperty("FirstName")?.GetValue(user)?.ToString();
 			var lastname = typeof(TUser).GetProperty("LastName")?.GetValue(user)?.ToString();
+
+			var claims = new List<Claim>();
+			claims.AddNameIdentifier(id);
+			claims.AddEmail(email);
+			claims.AddName($"{firstname} {lastname}");
+			claims.AddRoles(operationClaims.Select(c => typeof(TOperationClaim).GetProperty("Name")?.GetValue(c)?.ToString()).ToArray());
+
+			return claims;
 		}
 	}
 }
