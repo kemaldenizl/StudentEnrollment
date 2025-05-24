@@ -27,7 +27,10 @@ namespace Core.Utilities.Security.TokenCreators.JwtCreator
 
 		private IEnumerable<Claim> SetClaims(TUser user, List<TOperationClaim> operationClaims)
 		{
-
+			var id = typeof(TUser).GetProperty("Id")?.GetValue(user)?.ToString();
+			var email = typeof(TUser).GetProperty("Email")?.GetValue(user)?.ToString();
+			var firstname = typeof(TUser).GetProperty("FirstName")?.GetValue(user)?.ToString();
+			var lastname = typeof(TUser).GetProperty("LastName")?.GetValue(user)?.ToString();
 		}
 	}
 }
