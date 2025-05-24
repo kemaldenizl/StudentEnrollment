@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,11 @@ namespace Core.Utilities.Security.TokenCreators.JwtCreator
 			Configuration = configuration;
 			_tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 			_accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
+		}
+
+		private IEnumerable<Claim> SetClaims(TUser user, List<TOperationClaim> operationClaims)
+		{
+
 		}
 	}
 }
