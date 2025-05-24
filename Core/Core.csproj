@@ -17,7 +17,6 @@
     <Folder Include="Utilities\Security\Hashing\" />
     <Folder Include="Utilities\Security\Encryption\" />
     <Folder Include="Utilities\Security\TokenCreators\" />
-    <Folder Include="Utilities\Security\TokenEntities\" />
   </ItemGroup>
 
 </Project>
