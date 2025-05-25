@@ -13,5 +13,16 @@ namespace Presentation.Controllers
 		{
 			_courseService = courseService;
 		}
+
+		[HttpGet("getall")]
+		public IActionResult GetAll()
+		{
+			var result = _courseService.GetAll();
+			if (result.Success)
+			{
+				return Ok(result);
+			}
+			return BadRequest(result);
+		}
 	}
 }
