@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using DataAccess.Abstract;
+using Entities.Concrete;
 
 namespace Business.Concrete
 {
@@ -16,6 +17,19 @@ namespace Business.Concrete
 		{
 			_adminDal = adminDal;
 		}
+		public List<OperationClaim> GetClaims(Admin admin)
+		{
+			return _adminDal.GetClaims(admin);
+		}
 
+		public void Add(Admin admin)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Admin GetByMail(string email)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
