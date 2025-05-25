@@ -47,5 +47,18 @@ namespace Presentation.Controllers
 			}
 			return BadRequest(result);
 		}
+
+		[HttpPut("update")]
+		public IActionResult Update(Course course)
+		{
+			var result = _courseService.Update(course);
+			if (result.Success)
+			{
+				return Ok(result);
+			}
+			return BadRequest(result);
+		}
+
+
 	}
 }
