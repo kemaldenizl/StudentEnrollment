@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,17 @@ namespace Presentation.Controllers
 		public IActionResult GetById(int id)
 		{
 			var result = _courseService.GetById(id);
+			if (result.Success)
+			{
+				return Ok(result);
+			}
+			return BadRequest(result);
+		}
+
+		[HttpPost("add")]
+		public IActionResult Add(Course course)
+		{
+			var result = _courseService.Add(course);
 			if (result.Success)
 			{
 				return Ok(result);
