@@ -24,6 +24,16 @@ namespace Business.DependencyResolvers.Autofac
 			builder.RegisterType<EfStudentDal>().As<IStudentDal>();
 			builder.RegisterType<StudentManager>().As<IStudentService>();
 			builder.RegisterType<StudentAuthManager>().As<IStudentAuthService>();
+
+			builder.RegisterType<JwtHelper<Teacher, OperationClaim>>().As<ITokenHelper<Teacher, OperationClaim>>();
+			builder.RegisterType<EfTeacherDal>().As<ITeacherDal>();
+			builder.RegisterType<TeacherManager>().As<ITeacherService>();
+			builder.RegisterType<TeacherAuthManager>().As<ITeacherAuthService>();
+
+			builder.RegisterType<JwtHelper<Admin, OperationClaim>>().As<ITokenHelper<Admin, OperationClaim>>();
+			builder.RegisterType<EfAdminDal>().As<IAdminDal>();
+			builder.RegisterType<AdminManager>().As<IAdminService>();
+			builder.RegisterType<AdminAuthManager>().As<IAdminAuthService>();
 		}
 	}
 }
