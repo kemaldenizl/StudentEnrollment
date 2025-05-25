@@ -59,6 +59,15 @@ namespace Presentation.Controllers
 			return BadRequest(result);
 		}
 
-
+		[HttpDelete("delete")]
+		public IActionResult Delete(Course course)
+		{
+			var result = _courseService.Delete(course);
+			if (result.Success)
+			{
+				return Ok(result);
+			}
+			return BadRequest(result);
+		}
 	}
 }
