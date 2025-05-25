@@ -1,6 +1,7 @@
 ﻿using Business.Abstract.AuthServices;
 using Entities.Dtos.LoginDtos;
 using Entities.Dtos.RegisterDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace Presentation.Controllers
 			_studentAuthService = studentAuthService;
 		}
 
+		[Authorize()]
 		[HttpPost("login")]
 		public ActionResult Login([FromBody] StudentLoginDto studentLoginDto)
 		{
