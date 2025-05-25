@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Business.Abstract.AuthServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -7,5 +8,12 @@ namespace Presentation.Controllers
 	[ApiController]
 	public class StudentsAuthController : ControllerBase
 	{
+		private IStudentAuthService _studentAuthService;
+		public StudentsAuthController(IStudentAuthService studentAuthService)
+		{
+			_studentAuthService = studentAuthService;
+		}
+
+
 	}
 }
