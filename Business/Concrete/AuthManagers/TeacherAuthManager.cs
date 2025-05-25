@@ -13,6 +13,7 @@ using Core.Utilities.Security.TokenCreators;
 using Core.Utilities.Security.TokenEntities;
 using Entities.Concrete;
 using Entities.Dtos.LoginDtos;
+using Entities.Dtos.RegisterDtos;
 
 namespace Business.Concrete.AuthManagers
 {
@@ -50,6 +51,27 @@ namespace Business.Concrete.AuthManagers
 			}
 
 			return new SuccessDataResult<Teacher>(teacherToCheck, Messages.SuccessfulLogin); //Success login operation return teacher entity.
+		}
+
+		public IDataResult<Teacher> Register(TeacherRegisterDto teacherRegisterDto)
+		{
+			byte[] passwordHash, passwordSalt;
+			HashingHelper.CreatePasswordHash(teacherRegisterDto.Password, out passwordHash, out passwordSalt); //turn password into hash and salt
+
+			var teacher = new Teacher //creating teacher entity from teacherRegisterDto
+			{
+				FirstName = teacherRegisterDto.FirstName,
+				LastName = teacherRegisterDto.LastName,
+				Email = teacherRegisterDto.Email,
+				PasswordHash = passwordHash,
+				PasswordSalt = passwordSalt,
+				HireDate = teacherRegisterDto.HireDate,
+				Department = teacherRegisterDto.Department
+			};
+
+			_teacherService.Add(teacher); //adding teacher to database
+
+			return new SuccessDataResult<Teacher>(teacher, Messages.UserRegistered); //return success result with teacher entity
 		}
 	}
 }
