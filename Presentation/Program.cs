@@ -2,6 +2,10 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
+using Core.Utilities.Security.Encryption;
+using Core.Utilities.Security.TokenEntities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Presentation
 {
@@ -12,6 +16,24 @@ namespace Presentation
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
+
+			var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+			builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(options =>
+				{
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateIssuer = true,
+						ValidateAudience = true,
+						ValidateLifetime = true,
+						ValidateIssuerSigningKey = true,
+
+						ValidIssuer = tokenOptions.Issuer,
+						ValidAudience = tokenOptions.Audience,
+						IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey),
+					};
+				});
 
 			builder.Services.AddControllers().AddXmlSerializerFormatters();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
