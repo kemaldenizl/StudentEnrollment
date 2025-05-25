@@ -17,7 +17,6 @@ namespace Presentation.Controllers
 			_studentAuthService = studentAuthService;
 		}
 
-		[Authorize()]
 		[HttpPost("login")]
 		public ActionResult Login([FromBody] StudentLoginDto studentLoginDto)
 		{
