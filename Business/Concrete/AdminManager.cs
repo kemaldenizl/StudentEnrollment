@@ -24,12 +24,12 @@ namespace Business.Concrete
 
 		public void Add(Admin admin)
 		{
-			throw new NotImplementedException();
+			_adminDal.Add(admin);
 		}
 
 		public Admin GetByMail(string email)
 		{
-			throw new NotImplementedException();
+			return _adminDal.Get(a => a.Email == email);
 		}
 	}
 }
