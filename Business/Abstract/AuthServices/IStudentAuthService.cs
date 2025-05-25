@@ -11,11 +11,11 @@ using Entities.Dtos.RegisterDtos;
 
 namespace Business.Abstract.AuthServices
 {
-	public interface ITeacherAuthService
+	public interface IStudentAuthService
 	{
-		IDataResult<Teacher> Register(TeacherRegisterDto teacherRegisterDto);
-		IDataResult<Teacher> Login(TeacherLoginDto teacherLoginDto);
+		IDataResult<Student> Register(StudentRegisterDto studentRegisterDto);
+		IDataResult<Student> Login(StudentLoginDto studentLoginDto);
 		IResult UserExists(string email);
-		IDataResult<AccessToken> CreateAccessToken(Teacher teacher);
+		IDataResult<AccessToken> CreateAccessToken(Student student);
 	}
 }
