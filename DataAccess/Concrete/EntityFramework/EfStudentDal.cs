@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Core.DataAccess.Concrete.EntityFramework;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework.Contexts;
+using Entities.Concrete;
+
+namespace DataAccess.Concrete.EntityFramework
+{
+	public class EfStudentDal : EfEntityRepositoryBase<Student, StudentEnrollmentContext>, IStudentDal
+	{
+		public List<OperationClaim> GetClaims(Student student)
+		{
+			using (var context = new StudentEnrollmentContext())
+			{
+				var result = from operationClaim in context.OperationClaims
+					join StudentOperationClaim in context.StudentOperationClaims
+						on operationClaim.Id equals StudentOperationClaim.OperationClaimId
+					where StudentOperationClaim.StudentId == student.Id
+					select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
+
+				return result.ToList();
+			}
+		}
+	}
+}
