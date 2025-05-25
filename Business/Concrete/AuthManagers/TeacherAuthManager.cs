@@ -8,6 +8,7 @@ using Business.Abstract.AuthServices;
 using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete.DataResultTypes;
+using Core.Utilities.Results.Concrete.ResultTypes;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.TokenCreators;
 using Core.Utilities.Security.TokenEntities;
@@ -72,6 +73,16 @@ namespace Business.Concrete.AuthManagers
 			_teacherService.Add(teacher); //adding teacher to database
 
 			return new SuccessDataResult<Teacher>(teacher, Messages.UserRegistered); //return success result with teacher entity
+		}
+
+		public IResult UserExists(string email)
+		{
+			if (_teacherService.GetByMail(email) != null)
+			{
+				return new ErrorResult(Messages.UserAlreadyExists); //if user exists return error
+			}
+
+			return new SuccessResult(); //if user not exists return success not necessary to return a message here
 		}
 	}
 }
