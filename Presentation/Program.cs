@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Presentation.Middlewares;
 
 namespace Presentation
 {
@@ -63,6 +64,8 @@ namespace Presentation
 				});
 
 			var app = builder.Build();
+
+			app.UseMiddleware<GlobalExceptionMiddleware>();
 
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())

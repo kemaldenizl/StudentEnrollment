@@ -25,7 +25,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 		[HttpGet("getAllByStudent/{studentId}")]
 		public IActionResult GetEnrollmentsByStudent(int studentId)
@@ -35,7 +35,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 		[HttpGet("getAllByCourse/{courseId}")]
 		public IActionResult GetEnrollmentsByCourse(int courseId)
@@ -45,7 +45,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 
 		[HttpGet("{id}")]
@@ -56,7 +56,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 
 		[HttpPost("add")]

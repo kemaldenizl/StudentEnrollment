@@ -23,7 +23,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 		[HttpGet("getAllByStudent/{studentId}")]
 		public IActionResult GetAllByStudent(int studentId)
@@ -33,7 +33,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 		[HttpGet("getAllByOperationClaim/{operationClaimId}")]
 		public IActionResult GetAllByOperationClaim(int operationClaimId)
@@ -43,7 +43,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 		[HttpGet("{id}")]
 		public IActionResult GetById(int id)
@@ -53,7 +53,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 		[HttpPost("add")]
 		public IActionResult Add(StudentOperationClaim studentOperationClaim)

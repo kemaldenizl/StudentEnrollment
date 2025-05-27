@@ -23,7 +23,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 
 		[HttpGet("{id}")]
@@ -34,7 +34,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 
 		[HttpDelete("{id}")]

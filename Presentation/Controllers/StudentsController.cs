@@ -22,7 +22,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 		[HttpGet("{id}")]
 		public IActionResult GetById(int id)
@@ -32,7 +32,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest(result);
+			return NotFound(result);
 		}
 		[HttpDelete("{id}")]
 		public IActionResult Delete(int id)
