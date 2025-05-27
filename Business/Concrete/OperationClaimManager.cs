@@ -33,19 +33,22 @@ namespace Business.Concrete
 			return result;
 		}
 
-		public void Add(OperationClaim operationClaim)
+		public OperationClaim Add(OperationClaim operationClaim)
 		{
-			_operationClaimDal.Add(operationClaim);
+			var result = _operationClaimDal.Add(operationClaim);
+			return result;
 		}
 
-		public void Update(OperationClaim operationClaim)
+		public OperationClaim Update(OperationClaim operationClaim)
 		{
-			_operationClaimDal.Update(operationClaim);
+			var result = _operationClaimDal.Update(operationClaim);
+			return result;
 		}
 
-		public void Delete(OperationClaim operationClaim)
+		public OperationClaim Delete(OperationClaim operationClaim)
 		{
-			_operationClaimDal.Delete(operationClaim);
+			var result = _operationClaimDal.Delete(operationClaim);
+			return result;
 		}
 	}
 }

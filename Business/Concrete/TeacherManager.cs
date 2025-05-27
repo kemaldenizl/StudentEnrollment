@@ -51,10 +51,13 @@ namespace Business.Concrete
 			return result;
 		}
 
-		public void Delete(int id)
+		public Teacher Delete(int id)
 		{
 			var teacher = _teacherDal.Get(t => t.Id == id);
-			_teacherDal.Delete(teacher);
+			var result = _teacherDal.Delete(teacher);
+			result.PasswordHash = null;
+			result.PasswordSalt = null;
+			return result;
 		}
 	}
 }

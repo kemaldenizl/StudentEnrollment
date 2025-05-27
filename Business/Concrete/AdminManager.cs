@@ -52,10 +52,13 @@ namespace Business.Concrete
 			return result;
 		}
 
-		public void Delete(int id)
+		public Admin Delete(int id)
 		{
 			var admin = _adminDal.Get(a => a.Id == id);
-			_adminDal.Delete(admin);
+			var result = _adminDal.Delete(admin);
+			result.PasswordHash = null;
+			result.PasswordSalt = null;
+			return result;
 		}
 	}
 }

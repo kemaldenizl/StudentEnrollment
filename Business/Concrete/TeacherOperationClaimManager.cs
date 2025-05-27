@@ -36,17 +36,20 @@ namespace Business.Concrete
 			var result = _teacherOperationClaimDal.Get(t => t.Id == id);
 			return result;
 		}
-		public void Add(TeacherOperationClaim teacherOperationClaim)
+		public TeacherOperationClaim Add(TeacherOperationClaim teacherOperationClaim)
 		{
-			_teacherOperationClaimDal.Add(teacherOperationClaim);
+			var result = _teacherOperationClaimDal.Add(teacherOperationClaim);
+			return result;
 		}
-		public void Update(TeacherOperationClaim teacherOperationClaim)
+		public TeacherOperationClaim Update(TeacherOperationClaim teacherOperationClaim)
 		{
-			_teacherOperationClaimDal.Update(teacherOperationClaim);
+			var result = _teacherOperationClaimDal.Update(teacherOperationClaim);
+			return result;
 		}
-		public void Delete(TeacherOperationClaim teacherOperationClaim)
+		public TeacherOperationClaim Delete(TeacherOperationClaim teacherOperationClaim)
 		{
-			_teacherOperationClaimDal.Delete(teacherOperationClaim);
+			var result = _teacherOperationClaimDal.Delete(teacherOperationClaim);
+			return result;
 		}
 	}
 }

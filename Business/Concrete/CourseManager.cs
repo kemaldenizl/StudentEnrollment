@@ -39,19 +39,22 @@ namespace Business.Concrete
 			return result;
 		}
 
-		public void Add(Course course)
+		public Course Add(Course course)
 		{
-			_courseDal.Add(course);
+			var result = _courseDal.Add(course);
+			return result;
 		}
 
-		public void Update(Course course)
+		public Course Update(Course course)
 		{
-			_courseDal.Update(course);
+			var result = _courseDal.Update(course);
+			return result;
 		}
 
-		public void Delete(Course course)
+		public Course Delete(Course course)
 		{
-			_courseDal.Delete(course);
+			var result = _courseDal.Delete(course);
+			return result;
 		}
 	}
 }

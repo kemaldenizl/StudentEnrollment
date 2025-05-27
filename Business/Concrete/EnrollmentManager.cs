@@ -45,19 +45,22 @@ namespace Business.Concrete
 			return result;
 		}
 
-		public void Add(Enrollment enrollment)
+		public Enrollment Add(Enrollment enrollment)
 		{
-			_enrollmentDal.Add(enrollment);
+			var result = _enrollmentDal.Add(enrollment);
+			return result;
 		}
 
-		public void Update(Enrollment enrollment)
+		public Enrollment Update(Enrollment enrollment)
 		{
-			_enrollmentDal.Update(enrollment);
+			var result = _enrollmentDal.Update(enrollment);
+			return result;
 		}
 
-		public void Delete(Enrollment enrollment)
+		public Enrollment Delete(Enrollment enrollment)
 		{
-			_enrollmentDal.Delete(enrollment);
+			var result = _enrollmentDal.Delete(enrollment);
+			return result;
 		}
 	}
 }
