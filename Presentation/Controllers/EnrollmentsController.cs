@@ -62,22 +62,22 @@ namespace Presentation.Controllers
 		[HttpPost("add")]
 		public IActionResult Add(Enrollment enrollment)
 		{
-			_enrollmentService.Add(enrollment);
-			return Ok("Ok.");
+			var result = _enrollmentService.Add(enrollment);
+			return Ok(result);
 		}
 
 		[HttpPut("update")]
 		public IActionResult Update(Enrollment enrollment)
 		{
-			_enrollmentService.Update(enrollment);
-			return Ok("Ok.");
+			var result = _enrollmentService.Update(enrollment);
+			return Ok(result);
 		}
 
 		[HttpDelete("delete")]
 		public IActionResult Delete(Enrollment enrollment)
 		{
-			_enrollmentService.Delete(enrollment);
-			return Ok("Ok.");
+			var result = _enrollmentService.Delete(enrollment);
+			return Ok(result);
 		}
 	}
 }

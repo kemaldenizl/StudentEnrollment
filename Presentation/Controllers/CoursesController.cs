@@ -51,22 +51,22 @@ namespace Presentation.Controllers
 		[HttpPost("add")]
 		public IActionResult Add(Course course)
 		{
-			_courseService.Add(course);
-			return Ok("Ok.");
+			var result = _courseService.Add(course);
+			return Ok(result);
 		}
 
 		[HttpPut("update")]
 		public IActionResult Update(Course course)
 		{
-			_courseService.Update(course);
-			return Ok("Ok.");
+			var result = _courseService.Update(course);
+			return Ok(result);
 		}
 
 		[HttpDelete("delete")]
 		public IActionResult Delete(Course course)
 		{
-			_courseService.Delete(course);
-			return Ok("Ok.");
+			var result = _courseService.Delete(course);
+			return Ok(result);
 		}
 	}
 }

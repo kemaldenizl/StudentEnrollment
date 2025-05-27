@@ -62,22 +62,22 @@ namespace Presentation.Controllers
 		[HttpPost("add")]
 		public IActionResult Add(AdminOperationClaim adminOperationClaim)
 		{
-			_adminOperationClaimService.Add(adminOperationClaim);
-			return Ok("Ok.");
+			var result = _adminOperationClaimService.Add(adminOperationClaim);
+			return Ok(result);
 		}
 
 		[HttpPut("update")]
 		public IActionResult Update(AdminOperationClaim adminOperationClaim)
 		{
-			_adminOperationClaimService.Update(adminOperationClaim);
-			return Ok("Ok.");
+			var result = _adminOperationClaimService.Update(adminOperationClaim);
+			return Ok(result);
 		}
 
 		[HttpDelete("delete")]
 		public IActionResult Delete(AdminOperationClaim adminOperationClaim)
 		{
-			_adminOperationClaimService.Delete(adminOperationClaim);
-			return Ok("Ok.");
+			var result = _adminOperationClaimService.Delete(adminOperationClaim);
+			return Ok(result);
 		}
 	}
 }

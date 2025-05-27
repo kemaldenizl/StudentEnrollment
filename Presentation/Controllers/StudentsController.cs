@@ -37,8 +37,8 @@ namespace Presentation.Controllers
 		[HttpDelete("{id}")]
 		public IActionResult Delete(int id)
 		{
-			_studentService.Delete(id);
-			return Ok("Ok.");
+			var result = _studentService.Delete(id);
+			return Ok(result);
 		}
 	}
 }

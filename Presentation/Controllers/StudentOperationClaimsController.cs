@@ -58,21 +58,21 @@ namespace Presentation.Controllers
 		[HttpPost("add")]
 		public IActionResult Add(StudentOperationClaim studentOperationClaim)
 		{
-			_studentOperationClaimService.Add(studentOperationClaim);
-			return Ok("Ok.");
+			var result = _studentOperationClaimService.Add(studentOperationClaim);
+			return Ok(result);
 		}
 		[HttpPut("update")]
 		public IActionResult Update(StudentOperationClaim studentOperationClaim)
 		{
-			_studentOperationClaimService.Update(studentOperationClaim);
-			return Ok("Ok.");
+			var result = _studentOperationClaimService.Update(studentOperationClaim);
+			return Ok(result);
 		}
 
 		[HttpDelete("delete")]
 		public IActionResult Delete(StudentOperationClaim studentOperationClaim)
 		{
-			_studentOperationClaimService.Delete(studentOperationClaim);
-			return Ok("Ok.");
+			var result = _studentOperationClaimService.Delete(studentOperationClaim);
+			return Ok(result);
 		}
 	}
 }
