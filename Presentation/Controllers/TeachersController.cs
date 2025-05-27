@@ -35,10 +35,10 @@ namespace Presentation.Controllers
 			}
 			return BadRequest(result);
 		}
-		[HttpDelete("delete")]
-		public IActionResult Delete(Teacher teacher)
+		[HttpDelete("{id}")]
+		public IActionResult Delete(int id)
 		{
-			_teacherService.Delete(teacher);
+			_teacherService.Delete(id);
 			return Ok("Ok.");
 		}
 	}

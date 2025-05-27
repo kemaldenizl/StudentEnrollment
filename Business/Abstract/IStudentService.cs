@@ -14,6 +14,6 @@ namespace Business.Abstract
 		Student GetByMail(string email);
 		List<Student> GetAll();
 		Student Get(int id);
-		void Delete(Student student);
+		void Delete(int id);
 	}
 }

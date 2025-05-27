@@ -52,8 +52,9 @@ namespace Business.Concrete
 			return result;
 		}
 
-		public void Delete(Student student)
+		public void Delete(int id)
 		{
+			var student = _studentDal.Get(s => s.Id == id);
 			_studentDal.Delete(student);
 		}
 	}

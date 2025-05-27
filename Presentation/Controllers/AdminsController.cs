@@ -37,10 +37,10 @@ namespace Presentation.Controllers
 			return BadRequest(result);
 		}
 
-		[HttpDelete("delete")]
-		public IActionResult Delete(Admin admin)
+		[HttpDelete("{id}")]
+		public IActionResult Delete(int id)
 		{
-			_adminService.Delete(admin); 
+			_adminService.Delete(id); 
 			return Ok("Ok.");
 		}
 	}
