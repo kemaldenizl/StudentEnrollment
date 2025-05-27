@@ -34,6 +34,11 @@ namespace Business.DependencyResolvers.Autofac
 			builder.RegisterType<EfAdminDal>().As<IAdminDal>();
 			builder.RegisterType<AdminManager>().As<IAdminService>();
 			builder.RegisterType<AdminAuthManager>().As<IAdminAuthService>();
+
+			builder.RegisterType<EfCourseDal>().As<ICourseDal>();
+			builder.RegisterType<CourseManager>().As<ICourseService>();
+			builder.RegisterType<EfEnrollmentDal>().As<IEnrollmentDal>();
+			builder.RegisterType<EnrollmentManager>().As<IEnrollmentService>();
 		}
 	}
 }
