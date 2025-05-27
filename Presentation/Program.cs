@@ -5,7 +5,10 @@ using Business.DependencyResolvers.Autofac;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.TokenEntities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace Presentation
 {
@@ -36,9 +39,21 @@ namespace Presentation
 				});
 
 			builder.Services.AddControllers().AddXmlSerializerFormatters();
+
+			builder.Services.Configure<MvcOptions>(options =>
+			{
+				options.InputFormatters.Clear();
+				options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
+			});
+
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
+			builder.Services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentEnrollment API", Version = "v1" });
+				c.SupportNonNullableReferenceTypes();
+				c.OperationFilter<AddRequiredHeaderParameter>();
+			});
 
 			builder.Host
 				.UseServiceProviderFactory(new AutofacServiceProviderFactory())

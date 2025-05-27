@@ -7,6 +7,7 @@ namespace Presentation.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Produces("application/xml")]
 	public class OperationClaimsController : ControllerBase
 	{
 		private IOperationClaimService _operationClaimService;
