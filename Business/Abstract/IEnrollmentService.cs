@@ -10,8 +10,8 @@ namespace Business.Abstract
 	public interface IEnrollmentService
 	{
 		List<Enrollment> GetAll();
-		public List<Enrollment> GetEnrollmentsByStudent(int studentId);
-		public List<Enrollment> GetEnrollmentsByCourse(int courseId);
+		public List<Enrollment> GetAllByStudent(int studentId);
+		public List<Enrollment> GetAllByCourse(int courseId);
 		Enrollment GetById(int id);
 		void Add(Enrollment enrollment);
 		void Update(Enrollment enrollment);

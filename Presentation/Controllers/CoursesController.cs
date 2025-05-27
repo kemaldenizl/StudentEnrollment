@@ -26,10 +26,10 @@ namespace Presentation.Controllers
 			}
 			return BadRequest(result);
 		}
-		[HttpGet("getCourseByTeacher/{teacherId}")]
-		public IActionResult GetCoursesByTeacher(int teacherId)
+		[HttpGet("getAllByTeacher/{teacherId}")]
+		public IActionResult GetAllByTeacher(int teacherId)
 		{
-			var result = _courseService.GetCoursesByTeacher(teacherId);
+			var result = _courseService.GetAllByTeacher(teacherId);
 			if (result != null)
 			{
 				return Ok(result);

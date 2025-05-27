@@ -27,20 +27,20 @@ namespace Presentation.Controllers
 			}
 			return BadRequest(result);
 		}
-		[HttpGet("getEnrollmentsByStudent/{studentId}")]
+		[HttpGet("getAllByStudent/{studentId}")]
 		public IActionResult GetEnrollmentsByStudent(int studentId)
 		{
-			var result = _enrollmentService.GetEnrollmentsByStudent(studentId);
+			var result = _enrollmentService.GetAllByStudent(studentId);
 			if (result != null)
 			{
 				return Ok(result);
 			}
 			return BadRequest(result);
 		}
-		[HttpGet("getEnrollmentsByCourse/{courseId}")]
+		[HttpGet("getAllByCourse/{courseId}")]
 		public IActionResult GetEnrollmentsByCourse(int courseId)
 		{
-			var result = _enrollmentService.GetEnrollmentsByCourse(courseId);
+			var result = _enrollmentService.GetAllByCourse(courseId);
 			if (result != null)
 			{
 				return Ok(result);

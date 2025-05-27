@@ -25,7 +25,7 @@ namespace Business.Concrete
 			return result;
 		}
 
-		public List<Course> GetCoursesByTeacher(int teacherId)
+		public List<Course> GetAllByTeacher(int teacherId)
 		{
 			var result = _courseDal.GetAll(c => c.TeacherId == teacherId);
 

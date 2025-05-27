@@ -25,13 +25,13 @@ namespace Business.Concrete
 
 			return result;
 		}
-		public List<Enrollment> GetEnrollmentsByStudent(int studentId)
+		public List<Enrollment> GetAllByStudent(int studentId)
 		{
 			var result = _enrollmentDal.GetAll(e => e.StudentId == studentId);
 
 			return result;
 		}
-		public List<Enrollment> GetEnrollmentsByCourse(int courseId)
+		public List<Enrollment> GetAllByCourse(int courseId)
 		{
 			var result = _enrollmentDal.GetAll(e => e.CourseId == courseId);
 
