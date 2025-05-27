@@ -12,5 +12,8 @@ namespace Business.Abstract
 		List<OperationClaim> GetClaims(Admin admin);
 		void Add(Admin admin);
 		Admin GetByMail(string email);
+		List<Admin> GetAll();
+		Admin Get(int id);
+		void Delete(Admin admin);
 	}
 }

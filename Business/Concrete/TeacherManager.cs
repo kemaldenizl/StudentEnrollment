@@ -31,5 +31,22 @@ namespace Business.Concrete
 		{
 			return _teacherDal.Get(t => t.Email == email);
 		}
+
+		public List<Teacher> GetAll()
+		{
+			var result = _teacherDal.GetAll();
+			return result;
+		}
+
+		public Teacher Get(int id)
+		{
+			var result = _teacherDal.Get(t => t.Id == id);
+			return result;
+		}
+
+		public void Delete(Teacher teacher)
+		{
+			_teacherDal.Delete(teacher);
+		}
 	}
 }

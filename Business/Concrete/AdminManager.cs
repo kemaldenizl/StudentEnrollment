@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
 namespace Business.Concrete
@@ -30,6 +31,23 @@ namespace Business.Concrete
 		public Admin GetByMail(string email)
 		{
 			return _adminDal.Get(a => a.Email == email);
+		}
+
+		public List<Admin> GetAll()
+		{
+			var result = _adminDal.GetAll();
+			return result;
+		}
+
+		public Admin Get(int id)
+		{
+			var result = _adminDal.Get(a => a.Id == id);
+			return result;
+		}
+
+		public void Delete(Admin admin)
+		{
+			_adminDal.Delete(admin);
 		}
 	}
 }

@@ -12,5 +12,8 @@ namespace Business.Abstract
 		List<OperationClaim> GetClaims(Teacher teacher);
 		void Add(Teacher teacher);
 		Teacher GetByMail(string email);
+		List<Teacher> GetAll();
+		Teacher Get(int id);
+		void Delete(Teacher teacher);
 	}
 }
