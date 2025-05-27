@@ -25,6 +25,13 @@ namespace Business.Concrete
 			return result;
 		}
 
+		public List<Course> GetCoursesByTeacher(int teacherId)
+		{
+			var result = _courseDal.GetAll(c => c.TeacherId == teacherId);
+
+			return result;
+		}
+
 		public Course GetById(int id)
 		{
 			var result = _courseDal.Get(c => c.Id == id);

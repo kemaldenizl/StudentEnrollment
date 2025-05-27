@@ -27,6 +27,26 @@ namespace Presentation.Controllers
 			}
 			return BadRequest(result);
 		}
+		[HttpGet("getEnrollmentsByStudent/{studentId}")]
+		public IActionResult GetEnrollmentsByStudent(int studentId)
+		{
+			var result = _enrollmentService.GetEnrollmentsByStudent(studentId);
+			if (result != null)
+			{
+				return Ok(result);
+			}
+			return BadRequest(result);
+		}
+		[HttpGet("getEnrollmentsByCourse/{courseId}")]
+		public IActionResult GetEnrollmentsByCourse(int courseId)
+		{
+			var result = _enrollmentService.GetEnrollmentsByCourse(courseId);
+			if (result != null)
+			{
+				return Ok(result);
+			}
+			return BadRequest(result);
+		}
 
 		[HttpGet("{id}")]
 		public IActionResult GetById(int id)

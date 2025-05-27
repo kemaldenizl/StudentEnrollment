@@ -10,6 +10,7 @@ namespace Business.Abstract
 	public interface ICourseService
 	{
 		List<Course> GetAll();
+		public List<Course> GetCoursesByTeacher(int teacherId);
 		Course GetById(int id);
 		void Add(Course course);
 		void Update(Course course);
