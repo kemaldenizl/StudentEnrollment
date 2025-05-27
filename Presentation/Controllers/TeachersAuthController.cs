@@ -1,4 +1,6 @@
 ﻿using Business.Abstract.AuthServices;
+using Business.Constants;
+using Core.Entities.Concrete;
 using Entities.Dtos.LoginDtos;
 using Entities.Dtos.RegisterDtos;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +25,7 @@ namespace Presentation.Controllers
 			var userToLogin = _teacherAuthService.Login(teacherLoginDto);
 			if (userToLogin == null)
 			{
-				return BadRequest("Error to login.");
+				return BadRequest(new ErrorResponse(Messages.UserNotLogin));
 			}
 			var result = _teacherAuthService.CreateAccessToken(userToLogin);
 
@@ -31,7 +33,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return BadRequest("Error to login.");
+			return BadRequest(new ErrorResponse(Messages.AccessTokenError));
 		}
 
 		[HttpPost("register")]
@@ -39,12 +41,18 @@ namespace Presentation.Controllers
 		{
 			var userExists = _teacherAuthService.UserExists(teacherRegisterDto.Email);
 
-			if (!userExists)
+			if (userExists)
 			{
-				return BadRequest("User not found!");
+				return BadRequest(new ErrorResponse(Messages.UserAlreadyExists));
 			}
 
 			var registerResult = _teacherAuthService.Register(teacherRegisterDto);
+
+			if (registerResult == null)
+			{
+				return BadRequest(new ErrorResponse(Messages.UserNotRegister));
+			}
+
 			var result = _teacherAuthService.CreateAccessToken(registerResult);
 
 			if (result != null)
@@ -52,7 +60,7 @@ namespace Presentation.Controllers
 				return Ok(result);
 			}
 
-			return BadRequest("Error to register.");
+			return BadRequest(new ErrorResponse(Messages.AccessTokenError));
 		}
 	}
 }

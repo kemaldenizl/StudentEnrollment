@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +25,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return NotFound(result);
+			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 
 		[HttpGet("{id}")]
@@ -34,7 +36,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return NotFound(result);
+			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 
 		[HttpDelete("{id}")]

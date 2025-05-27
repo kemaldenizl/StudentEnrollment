@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +25,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return NotFound(result);
+			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("getAllByStudent/{studentId}")]
 		public IActionResult GetAllByStudent(int studentId)
@@ -33,7 +35,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return NotFound(result);
+			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("getAllByOperationClaim/{operationClaimId}")]
 		public IActionResult GetAllByOperationClaim(int operationClaimId)
@@ -43,7 +45,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return NotFound(result);
+			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("{id}")]
 		public IActionResult GetById(int id)
@@ -53,7 +55,7 @@ namespace Presentation.Controllers
 			{
 				return Ok(result);
 			}
-			return NotFound(result);
+			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpPost("add")]
 		public IActionResult Add(StudentOperationClaim studentOperationClaim)

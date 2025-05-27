@@ -1,4 +1,6 @@
-﻿namespace Presentation.Middlewares
+﻿using Core.Utilities.Exceptions;
+
+namespace Presentation.Middlewares
 {
 	public class GlobalExceptionMiddleware
 	{
@@ -17,13 +19,18 @@
 			}
 			catch (Exception ex)
 			{
-				context.Response.StatusCode = 500;
 				context.Response.ContentType = "application/xml";
+				context.Response.StatusCode = ex switch
+				{
+					NotFoundException => 404,
+					UnauthorizedException => 401,
+					_ => 500
+				};
 
 				var errorXml = $@"
-				<Error>
+				<ErrorResponse>
 					<Message>{System.Security.SecurityElement.Escape(ex.Message)}</Message>
-				</Error>";
+				</ErrorResponse>";
 
 				await context.Response.WriteAsync(errorXml);
 			}

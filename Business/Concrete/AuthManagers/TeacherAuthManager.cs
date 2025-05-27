@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Abstract.AuthServices;
+using Business.Constants;
+using Core.Utilities.Exceptions;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.TokenCreators;
 using Core.Utilities.Security.TokenEntities;
@@ -39,12 +41,12 @@ namespace Business.Concrete.AuthManagers
 
 			if (teacherToCheck == null) //if teacher not found return error
 			{
-				return null;
+				throw new NotFoundException(Messages.UserNotFound);
 			}
 
-			if (!HashingHelper.VerifyPasswordHash(teacherLoginDto.Password, teacherToCheck.PasswordHash,teacherToCheck.PasswordSalt)) //check if the password is false
+			if (!HashingHelper.VerifyPasswordHash(teacherLoginDto.Password, teacherToCheck.PasswordHash,teacherToCheck.PasswordSalt)) //check if the password is false return error
 			{
-				return null;
+				throw new UnauthorizedException(Messages.PasswordError);
 			}
 
 			return teacherToCheck; //return teacher entity.

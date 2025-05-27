@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Abstract.AuthServices;
+using Business.Constants;
+using Core.Utilities.Exceptions;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.TokenCreators;
 using Core.Utilities.Security.TokenEntities;
@@ -37,12 +39,12 @@ namespace Business.Concrete.AuthManagers
 
 			if (adminToCheck == null)
 			{
-				return null;
+				throw new NotFoundException(Messages.UserNotFound);
 			}
 
 			if (!HashingHelper.VerifyPasswordHash(adminLoginDto.Password, adminToCheck.PasswordHash, adminToCheck.PasswordSalt))
 			{
-				return null;
+				throw new UnauthorizedException(Messages.PasswordError);
 			}
 
 			return adminToCheck;
