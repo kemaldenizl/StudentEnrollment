@@ -11,9 +11,9 @@ namespace Entities.Dtos.LoginDtos
 	[XmlRoot(ElementName = "TeacherLoginDto")]
 	public class TeacherLoginDto : IDto
 	{
-		[XmlElement(ElementName = "Email")]
+		[XmlElement(ElementName = "email")]
 		public string Email { get; set; }
-		[XmlElement(ElementName = "Password")]
+		[XmlElement(ElementName = "password")]
 		public string Password { get; set; }
 	}
 }
