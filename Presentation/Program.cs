@@ -47,6 +47,33 @@ namespace Presentation
 				options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
 			});
 
+			builder.Services.Configure<ApiBehaviorOptions>(options =>
+			{
+				options.SuppressModelStateInvalidFilter = true;
+
+				options.InvalidModelStateResponseFactory = context =>
+				{
+					var errorMessages = context.ModelState
+						.Where(e => e.Value.Errors.Count > 0)
+						.SelectMany(e => e.Value.Errors.Select(err => err.ErrorMessage))
+						.ToList();
+
+					var combinedError = string.Join(" | ", errorMessages);
+
+					var xml = $@"
+					<ErrorResponse>
+						<Message>{System.Security.SecurityElement.Escape(combinedError)}</Message>
+					</ErrorResponse>";
+
+					return new ContentResult
+					{
+						Content = xml,
+						ContentType = "application/xml",
+						StatusCode = 400
+					};
+				};
+			});
+
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen(c =>
