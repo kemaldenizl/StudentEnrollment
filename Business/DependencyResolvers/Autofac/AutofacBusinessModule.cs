@@ -39,6 +39,8 @@ namespace Business.DependencyResolvers.Autofac
 			builder.RegisterType<CourseManager>().As<ICourseService>();
 			builder.RegisterType<EfEnrollmentDal>().As<IEnrollmentDal>();
 			builder.RegisterType<EnrollmentManager>().As<IEnrollmentService>();
+			builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>();
+			builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>();
 		}
 	}
 }

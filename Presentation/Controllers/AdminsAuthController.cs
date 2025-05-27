@@ -8,11 +8,11 @@ namespace Presentation.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class AdminsAuthManager : ControllerBase
+	public class AdminsAuthController : ControllerBase
 	{
 		private IAdminAuthService _adminAuthService;
 
-		public AdminsAuthManager(IAdminAuthService adminAuthService)
+		public AdminsAuthController(IAdminAuthService adminAuthService)
 		{
 			_adminAuthService = adminAuthService;
 		}
