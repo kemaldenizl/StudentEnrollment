@@ -11,8 +11,8 @@ namespace Core.DataAccess.Abstract
 	{
 		List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
 		TEntity Get(Expression<Func<TEntity, bool>> filter);
-		void Add(TEntity entity);
-		void Update(TEntity entity);
-		void Delete(TEntity entity);
+		TEntity Add(TEntity entity);
+		TEntity Update(TEntity entity);
+		TEntity Delete(TEntity entity);
 	}
 }

@@ -29,7 +29,7 @@ namespace Core.DataAccess.Concrete.EntityFramework
 			}
 		}
 
-		public void Add(TEntity entity)
+		public TEntity Add(TEntity entity)
 		{
 			using (TContext context = new TContext())
 			{
@@ -37,9 +37,11 @@ namespace Core.DataAccess.Concrete.EntityFramework
 				addedEntity.State = EntityState.Added;
 				context.SaveChanges();
 			}
+
+			return entity;
 		}
 
-		public void Update(TEntity entity)
+		public TEntity Update(TEntity entity)
 		{
 			using (TContext context = new TContext())
 			{
@@ -47,9 +49,10 @@ namespace Core.DataAccess.Concrete.EntityFramework
 				updatedEntity.State = EntityState.Modified;
 				context.SaveChanges();
 			}
+			return entity;
 		}
 
-		public void Delete(TEntity entity)
+		public TEntity Delete(TEntity entity)
 		{
 			using (TContext context = new TContext())
 			{
@@ -57,6 +60,7 @@ namespace Core.DataAccess.Concrete.EntityFramework
 				deletedEntity.State = EntityState.Deleted;
 				context.SaveChanges();
 			}
+			return entity;
 		}
 	}
 }
