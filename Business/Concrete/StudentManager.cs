@@ -36,12 +36,19 @@ namespace Business.Concrete
 		public List<Student> GetAll()
 		{
 			var result = _studentDal.GetAll();
+			foreach (var student in result)
+			{
+				student.PasswordHash = null;
+				student.PasswordSalt = null;
+			}
 			return result;
 		}
 
 		public Student Get(int id)
 		{
 			var result = _studentDal.Get(s => s.Id == id);
+			result.PasswordHash = null;
+			result.PasswordSalt = null;
 			return result;
 		}
 

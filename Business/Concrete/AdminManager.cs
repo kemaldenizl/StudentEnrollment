@@ -36,12 +36,19 @@ namespace Business.Concrete
 		public List<Admin> GetAll()
 		{
 			var result = _adminDal.GetAll();
+			foreach (var admin in result)
+			{
+				admin.PasswordHash = null;
+				admin.PasswordSalt = null;
+			}
 			return result;
 		}
 
 		public Admin Get(int id)
 		{
 			var result = _adminDal.Get(a => a.Id == id);
+			result.PasswordHash = null;
+			result.PasswordSalt = null;
 			return result;
 		}
 
