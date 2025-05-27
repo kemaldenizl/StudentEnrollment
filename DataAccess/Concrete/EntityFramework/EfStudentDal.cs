@@ -20,7 +20,7 @@ namespace DataAccess.Concrete.EntityFramework
 					join StudentOperationClaim in context.StudentOperationClaims
 						on operationClaim.Id equals StudentOperationClaim.OperationClaimId
 					where StudentOperationClaim.StudentId == student.Id
-					select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
+					select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name, Description = operationClaim.Description };
 
 				return result.ToList();
 			}
