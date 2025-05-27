@@ -5,10 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Abstract.AuthServices;
-using Business.Constants;
-using Core.Utilities.Results.Abstract;
-using Core.Utilities.Results.Concrete.DataResultTypes;
-using Core.Utilities.Results.Concrete.ResultTypes;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.TokenCreators;
 using Core.Utilities.Security.TokenEntities;
@@ -29,32 +25,32 @@ namespace Business.Concrete.AuthManagers
 			_tokenHelper = tokenHelper;
 		}
 
-		public IDataResult<AccessToken> CreateAccessToken(Teacher teacher)
+		public AccessToken CreateAccessToken(Teacher teacher)
 		{
 			var claims = _teacherService.GetClaims(teacher);
 			var accessToken = _tokenHelper.CreateToken(teacher, claims);
 
-			return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
+			return accessToken;
 		}
 
-		public IDataResult<Teacher> Login(TeacherLoginDto teacherLoginDto)
+		public Teacher Login(TeacherLoginDto teacherLoginDto)
 		{
 			var teacherToCheck = _teacherService.GetByMail(teacherLoginDto.Email); //first check if the teacher exists
 
 			if (teacherToCheck == null) //if teacher not found return error
 			{
-				return new ErrorDataResult<Teacher>(Messages.UserNotFound);
+				return null;
 			}
 
 			if (!HashingHelper.VerifyPasswordHash(teacherLoginDto.Password, teacherToCheck.PasswordHash,teacherToCheck.PasswordSalt)) //check if the password is false
 			{
-				return new ErrorDataResult<Teacher>(Messages.PasswordError);
+				return null;
 			}
 
-			return new SuccessDataResult<Teacher>(teacherToCheck, Messages.SuccessfulLogin); //Success login operation return teacher entity.
+			return teacherToCheck; //return teacher entity.
 		}
 
-		public IDataResult<Teacher> Register(TeacherRegisterDto teacherRegisterDto)
+		public Teacher Register(TeacherRegisterDto teacherRegisterDto)
 		{
 			byte[] passwordHash, passwordSalt;
 			HashingHelper.CreatePasswordHash(teacherRegisterDto.Password, out passwordHash, out passwordSalt); //turn password into hash and salt
@@ -72,17 +68,17 @@ namespace Business.Concrete.AuthManagers
 
 			_teacherService.Add(teacher); //adding teacher to database
 
-			return new SuccessDataResult<Teacher>(teacher, Messages.UserRegistered); //return success result with teacher entity
+			return teacher; //return teacher entity
 		}
 
-		public IResult UserExists(string email)
+		public bool UserExists(string email)
 		{
 			if (_teacherService.GetByMail(email) != null)
 			{
-				return new ErrorResult(Messages.UserAlreadyExists); //if user exists return error
+				return false; //if user exists return false
 			}
 
-			return new SuccessResult(); //if user not exists return success not necessary to return a message here
+			return true; //if user not exists return true
 		}
 	}
 }

@@ -7,6 +7,7 @@ namespace Presentation.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Produces("application/xml")]
 	public class CoursesController : ControllerBase
 	{
 		private ICourseService _courseService;
@@ -19,7 +20,7 @@ namespace Presentation.Controllers
 		public IActionResult GetAll()
 		{
 			var result = _courseService.GetAll();
-			if (result.Success)
+			if (result != null)
 			{
 				return Ok(result);
 			}
@@ -30,7 +31,7 @@ namespace Presentation.Controllers
 		public IActionResult GetById(int id)
 		{
 			var result = _courseService.GetById(id);
-			if (result.Success)
+			if (result != null)
 			{
 				return Ok(result);
 			}
@@ -40,34 +41,22 @@ namespace Presentation.Controllers
 		[HttpPost("add")]
 		public IActionResult Add(Course course)
 		{
-			var result = _courseService.Add(course);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_courseService.Add(course);
+			return Ok("Ok.");
 		}
 
 		[HttpPut("update")]
 		public IActionResult Update(Course course)
 		{
-			var result = _courseService.Update(course);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_courseService.Update(course);
+			return Ok("Ok.");
 		}
 
 		[HttpDelete("delete")]
 		public IActionResult Delete(Course course)
 		{
-			var result = _courseService.Delete(course);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_courseService.Delete(course);
+			return Ok("Ok.");
 		}
 	}
 }

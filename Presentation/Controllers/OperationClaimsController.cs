@@ -21,7 +21,7 @@ namespace Presentation.Controllers
 		public IActionResult GetAll()
 		{
 			var result = _operationClaimService.GetAll();
-			if (result.Success)
+			if (result != null)
 			{
 				return Ok(result);
 			}
@@ -32,7 +32,7 @@ namespace Presentation.Controllers
 		public IActionResult GetById(int id)
 		{
 			var result = _operationClaimService.GetById(id);
-			if (result.Success)
+			if (result != null)
 			{
 				return Ok(result);
 			}
@@ -42,34 +42,22 @@ namespace Presentation.Controllers
 		[HttpPost("add")]
 		public IActionResult Add(OperationClaim operationClaim)
 		{
-			var result = _operationClaimService.Add(operationClaim);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_operationClaimService.Add(operationClaim);
+			return Ok("Ok.");
 		}
 
 		[HttpPut("update")]
 		public IActionResult Update(OperationClaim operationClaim)
 		{
-			var result = _operationClaimService.Update(operationClaim);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_operationClaimService.Update(operationClaim);
+			return Ok("Ok.");
 		}
 
 		[HttpDelete("delete")]
 		public IActionResult Delete(OperationClaim operationClaim)
 		{
-			var result = _operationClaimService.Delete(operationClaim);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_operationClaimService.Delete(operationClaim);
+			return Ok("Ok.");
 		}
 	}
 }

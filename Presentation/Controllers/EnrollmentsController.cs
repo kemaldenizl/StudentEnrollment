@@ -7,6 +7,7 @@ namespace Presentation.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Produces("application/xml")]
 	public class EnrollmentsController : ControllerBase
 	{
 		private IEnrollmentService _enrollmentService;
@@ -20,7 +21,7 @@ namespace Presentation.Controllers
 		public IActionResult GetAll()
 		{
 			var result = _enrollmentService.GetAll();
-			if (result.Success)
+			if (result != null)
 			{
 				return Ok(result);
 			}
@@ -31,7 +32,7 @@ namespace Presentation.Controllers
 		public IActionResult GetById(int id)
 		{
 			var result = _enrollmentService.GetById(id);
-			if (result.Success)
+			if (result != null)
 			{
 				return Ok(result);
 			}
@@ -41,34 +42,22 @@ namespace Presentation.Controllers
 		[HttpPost("add")]
 		public IActionResult Add(Enrollment enrollment)
 		{
-			var result = _enrollmentService.Add(enrollment);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_enrollmentService.Add(enrollment);
+			return Ok("Ok.");
 		}
 
 		[HttpPut("update")]
 		public IActionResult Update(Enrollment enrollment)
 		{
-			var result = _enrollmentService.Update(enrollment);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_enrollmentService.Update(enrollment);
+			return Ok("Ok.");
 		}
 
 		[HttpDelete("delete")]
 		public IActionResult Delete(Enrollment enrollment)
 		{
-			var result = _enrollmentService.Delete(enrollment);
-			if (result.Success)
-			{
-				return Ok(result);
-			}
-			return BadRequest(result);
+			_enrollmentService.Delete(enrollment);
+			return Ok("Ok.");
 		}
 	}
 }

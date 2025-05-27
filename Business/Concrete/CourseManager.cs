@@ -4,10 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
-using Business.Constants;
-using Core.Utilities.Results.Abstract;
-using Core.Utilities.Results.Concrete.DataResultTypes;
-using Core.Utilities.Results.Concrete.ResultTypes;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -22,46 +18,33 @@ namespace Business.Concrete
 			_courseDal = courseDal;
 		}
 
-		public IDataResult<List<Course>> GetAll()
+		public List<Course> GetAll()
 		{
 			var result = _courseDal.GetAll();
 
-			if (result == null)
-			{
-				return new ErrorDataResult<List<Course>>(Messages.ErrorGetData);
-			}
-
-			return new SuccessDataResult<List<Course>>(result, Messages.SuccessGetData);
+			return result;
 		}
 
-		public IDataResult<Course> GetById(int id)
+		public Course GetById(int id)
 		{
 			var result = _courseDal.Get(c => c.Id == id);
 
-			if (result == null)
-			{
-				return new ErrorDataResult<Course>(Messages.ErrorGetData);
-			}
-
-			return new SuccessDataResult<Course>(result, Messages.SuccessGetData);
+			return result;
 		}
 
-		public IResult Add(Course course)
+		public void Add(Course course)
 		{
 			_courseDal.Add(course);
-			return new SuccessResult(Messages.SuccessAddData);
 		}
 
-		public IResult Update(Course course)
+		public void Update(Course course)
 		{
 			_courseDal.Update(course);
-			return new SuccessResult(Messages.SuccessUpdateData);
 		}
 
-		public IResult Delete(Course course)
+		public void Delete(Course course)
 		{
 			_courseDal.Delete(course);
-			return new SuccessResult(Messages.SuccessDeleteData);
 		}
 	}
 }

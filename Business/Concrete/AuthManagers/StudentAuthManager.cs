@@ -5,10 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Abstract.AuthServices;
-using Business.Constants;
-using Core.Utilities.Results.Abstract;
-using Core.Utilities.Results.Concrete.DataResultTypes;
-using Core.Utilities.Results.Concrete.ResultTypes;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.TokenCreators;
 using Core.Utilities.Security.TokenEntities;
@@ -29,33 +25,33 @@ namespace Business.Concrete.AuthManagers
 			_tokenHelper = tokenHelper;
 		}
 
-		public IDataResult<AccessToken> CreateAccessToken(Student student)
+		public AccessToken CreateAccessToken(Student student)
 		{
 			var claims = _studentService.GetClaims(student);
 			var accessToken = _tokenHelper.CreateToken(student, claims);
 
-			return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
+			return accessToken;
 		}
 
-		public IDataResult<Student> Login(StudentLoginDto studentLoginDto)
+		public Student Login(StudentLoginDto studentLoginDto)
 		{
 			var studentToCheck = _studentService.GetByMail(studentLoginDto.Email);
 
 			if (studentToCheck == null)
 			{
-				return new ErrorDataResult<Student>(Messages.UserNotFound);
+				return null;
 			}
 
 			if (!HashingHelper.VerifyPasswordHash(studentLoginDto.Password, studentToCheck.PasswordHash,
 				    studentToCheck.PasswordSalt))
 			{
-				return new ErrorDataResult<Student>(Messages.PasswordError);
+				return null;
 			}
 
-			return new SuccessDataResult<Student>(studentToCheck, Messages.SuccessfulLogin);
+			return studentToCheck;
 		}
 
-		public IDataResult<Student> Register(StudentRegisterDto studentRegisterDto)
+		public Student Register(StudentRegisterDto studentRegisterDto)
 		{
 			byte[] passwordHash, passwordSalt;
 			HashingHelper.CreatePasswordHash(studentRegisterDto.Password, out passwordHash, out passwordSalt);
@@ -73,17 +69,17 @@ namespace Business.Concrete.AuthManagers
 
 			_studentService.Add(student);
 
-			return new SuccessDataResult<Student>(student, Messages.UserRegistered);
+			return student;
 		}
 
-		public IResult UserExists(string email)
+		public bool UserExists(string email)
 		{
 			if (_studentService.GetByMail(email) != null)
 			{
-				return new ErrorResult(Messages.UserAlreadyExists);
+				return false;
 			}
 
-			return new SuccessResult();
+			return true;
 		}
 	}
 }

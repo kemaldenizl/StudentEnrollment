@@ -8,6 +8,7 @@ namespace Presentation.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Produces("application/xml")]
 	public class TeachersAuthController : ControllerBase
 	{
 		private ITeacherAuthService _teacherAuthService;
@@ -20,17 +21,17 @@ namespace Presentation.Controllers
 		public ActionResult Login([FromBody] TeacherLoginDto teacherLoginDto)
 		{
 			var userToLogin = _teacherAuthService.Login(teacherLoginDto);
-			if (!userToLogin.Success)
+			if (userToLogin == null)
 			{
-				return BadRequest(userToLogin.Message);
+				return BadRequest("Error to login.");
 			}
-			var result = _teacherAuthService.CreateAccessToken(userToLogin.Data);
+			var result = _teacherAuthService.CreateAccessToken(userToLogin);
 
-			if (result.Success)
+			if (result != null)
 			{
-				return Ok(result.Data);
+				return Ok(result);
 			}
-			return BadRequest(result.Message);
+			return BadRequest("Error to login.");
 		}
 
 		[HttpPost("register")]
@@ -38,20 +39,20 @@ namespace Presentation.Controllers
 		{
 			var userExists = _teacherAuthService.UserExists(teacherRegisterDto.Email);
 
-			if (!userExists.Success)
+			if (!userExists)
 			{
-				return BadRequest(userExists.Message);
+				return BadRequest("User not found!");
 			}
 
 			var registerResult = _teacherAuthService.Register(teacherRegisterDto);
-			var result = _teacherAuthService.CreateAccessToken(registerResult.Data);
+			var result = _teacherAuthService.CreateAccessToken(registerResult);
 
-			if (result.Success)
+			if (result != null)
 			{
-				return Ok(result.Data);
+				return Ok(result);
 			}
 
-			return BadRequest(result.Message);
+			return BadRequest("Error to register.");
 		}
 	}
 }

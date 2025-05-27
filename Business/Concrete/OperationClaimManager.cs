@@ -4,10 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
-using Business.Constants;
-using Core.Utilities.Results.Abstract;
-using Core.Utilities.Results.Concrete.DataResultTypes;
-using Core.Utilities.Results.Concrete.ResultTypes;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -23,46 +19,33 @@ namespace Business.Concrete
 			_operationClaimDal = operationClaimDal;
 		}
 
-		public IDataResult<List<OperationClaim>> GetAll()
+		public List<OperationClaim> GetAll()
 		{
 			var result = _operationClaimDal.GetAll();
 
-			if (result == null)
-			{
-				return new ErrorDataResult<List<OperationClaim>>(Messages.ErrorGetData);
-			}
-
-			return new SuccessDataResult<List<OperationClaim>>(result, Messages.SuccessGetData);
+			return result;
 		}
 
-		public IDataResult<OperationClaim> GetById(int id)
+		public OperationClaim GetById(int id)
 		{
 			var result = _operationClaimDal.Get(o => o.Id == id);
 
-			if (result == null)
-			{
-				return new ErrorDataResult<OperationClaim>(Messages.ErrorGetData);
-			}
-
-			return new SuccessDataResult<OperationClaim>(result, Messages.SuccessGetData);
+			return result;
 		}
 
-		public IResult Add(OperationClaim operationClaim)
+		public void Add(OperationClaim operationClaim)
 		{
 			_operationClaimDal.Add(operationClaim);
-			return new SuccessResult(Messages.SuccessAddData);
 		}
 
-		public IResult Update(OperationClaim operationClaim)
+		public void Update(OperationClaim operationClaim)
 		{
 			_operationClaimDal.Update(operationClaim);
-			return new SuccessResult(Messages.SuccessUpdateData);
 		}
 
-		public IResult Delete(OperationClaim operationClaim)
+		public void Delete(OperationClaim operationClaim)
 		{
 			_operationClaimDal.Delete(operationClaim);
-			return new SuccessResult(Messages.SuccessDeleteData);
 		}
 	}
 }

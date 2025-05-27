@@ -8,6 +8,7 @@ namespace Presentation.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Produces("application/xml")]
 	public class AdminsAuthController : ControllerBase
 	{
 		private IAdminAuthService _adminAuthService;
@@ -21,17 +22,17 @@ namespace Presentation.Controllers
 		public ActionResult Login([FromBody] AdminLoginDto adminLoginDto)
 		{
 			var userToLogin = _adminAuthService.Login(adminLoginDto);
-			if (!userToLogin.Success)
+			if (userToLogin == null)
 			{
-				return BadRequest(userToLogin.Message);
+				return BadRequest("Error to login.");
 			}
-			var result = _adminAuthService.CreateAccessToken(userToLogin.Data);
+			var result = _adminAuthService.CreateAccessToken(userToLogin);
 
-			if (result.Success)
+			if (result != null)
 			{
-				return Ok(result.Data);
+				return Ok(result);
 			}
-			return BadRequest(result.Message);
+			return BadRequest("Error to login.");
 		}
 
 		[HttpPost("register")]
@@ -39,20 +40,20 @@ namespace Presentation.Controllers
 		{
 			var userExists = _adminAuthService.UserExists(adminRegisterDto.Email);
 
-			if (!userExists.Success)
+			if (!userExists)
 			{
-				return BadRequest(userExists.Message);
+				return BadRequest("User not found!");
 			}
 
 			var registerResult = _adminAuthService.Register(adminRegisterDto);
-			var result = _adminAuthService.CreateAccessToken(registerResult.Data);
+			var result = _adminAuthService.CreateAccessToken(registerResult);
 
-			if (result.Success)
+			if (result != null)
 			{
-				return Ok(result.Data);
+				return Ok(result);
 			}
 
-			return BadRequest(result.Message);
+			return BadRequest("Error to register.");
 		}
 	}
 }

@@ -1,5 +1,4 @@
-﻿using Core.Utilities.Results.Abstract;
-using Entities.Concrete;
+﻿using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +9,10 @@ namespace Business.Abstract
 {
 	public interface IEnrollmentService
 	{
-		IDataResult<List<Enrollment>> GetAll();
-		IDataResult<Enrollment> GetById(int id);
-		IResult Add(Enrollment enrollment);
-		IResult Update(Enrollment enrollment);
-		IResult Delete(Enrollment enrollment);
+		List<Enrollment> GetAll();
+		Enrollment GetById(int id);
+		void Add(Enrollment enrollment);
+		void Update(Enrollment enrollment);
+		void Delete(Enrollment enrollment);
 	}
 }

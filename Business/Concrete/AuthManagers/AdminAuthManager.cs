@@ -5,10 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Abstract.AuthServices;
-using Business.Constants;
-using Core.Utilities.Results.Abstract;
-using Core.Utilities.Results.Concrete.DataResultTypes;
-using Core.Utilities.Results.Concrete.ResultTypes;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.TokenCreators;
 using Core.Utilities.Security.TokenEntities;
@@ -28,30 +24,30 @@ namespace Business.Concrete.AuthManagers
 			_adminService = adminService;
 			_tokenHelper = tokenHelper;
 		}
-		public IDataResult<AccessToken> CreateAccessToken(Admin admin)
+		public AccessToken CreateAccessToken(Admin admin)
 		{
 			var claims = _adminService.GetClaims(admin);
 			var accessToken = _tokenHelper.CreateToken(admin, claims);
 
-			return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
+			return accessToken;
 		}
-		public IDataResult<Admin> Login(AdminLoginDto adminLoginDto)
+		public Admin Login(AdminLoginDto adminLoginDto)
 		{
 			var adminToCheck = _adminService.GetByMail(adminLoginDto.Email);
 
 			if (adminToCheck == null)
 			{
-				return new ErrorDataResult<Admin>(Messages.UserNotFound);
+				return null;
 			}
 
 			if (!HashingHelper.VerifyPasswordHash(adminLoginDto.Password, adminToCheck.PasswordHash, adminToCheck.PasswordSalt))
 			{
-				return new ErrorDataResult<Admin>(Messages.PasswordError);
+				return null;
 			}
 
-			return new SuccessDataResult<Admin>(adminToCheck, Messages.SuccessfulLogin);
+			return adminToCheck;
 		}
-		public IDataResult<Admin> Register(AdminRegisterDto adminRegisterDto)
+		public Admin Register(AdminRegisterDto adminRegisterDto)
 		{
 			byte[] passwordHash, passwordSalt;
 			HashingHelper.CreatePasswordHash(adminRegisterDto.Password, out passwordHash, out passwordSalt);
@@ -67,15 +63,16 @@ namespace Business.Concrete.AuthManagers
 			};
 
 			_adminService.Add(admin);
-			return new SuccessDataResult<Admin>(admin, Messages.UserRegistered);
+			return admin;
 		}
-		public IResult UserExists(string email)
+		public bool UserExists(string email)
 		{
 			if (_adminService.GetByMail(email) != null)
 			{
-				return new ErrorResult(Messages.UserAlreadyExists);
+				return false;
 			}
-			return new SuccessResult();
+
+			return true;
 		}
 	}
 }

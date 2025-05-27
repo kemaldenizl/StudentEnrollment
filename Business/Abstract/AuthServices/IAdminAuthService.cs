@@ -1,5 +1,4 @@
-﻿using Core.Utilities.Results.Abstract;
-using Core.Utilities.Security.TokenEntities;
+﻿using Core.Utilities.Security.TokenEntities;
 using Entities.Concrete;
 using Entities.Dtos.LoginDtos;
 using Entities.Dtos.RegisterDtos;
@@ -13,9 +12,9 @@ namespace Business.Abstract.AuthServices
 {
 	public interface IAdminAuthService
 	{
-		IDataResult<Admin> Register(AdminRegisterDto adminRegisterDto);
-		IDataResult<Admin> Login(AdminLoginDto adminLoginDto);
-		IResult UserExists(string email);
-		IDataResult<AccessToken> CreateAccessToken(Admin admin);
+		Admin Register(AdminRegisterDto adminRegisterDto);
+		Admin Login(AdminLoginDto adminLoginDto);
+		bool UserExists(string email);
+		AccessToken CreateAccessToken(Admin admin);
 	}
 }
