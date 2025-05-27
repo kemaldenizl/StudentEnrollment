@@ -13,8 +13,8 @@ namespace Business.Abstract
 		public List<AdminOperationClaim> GetAllByAdmin(int adminId);
 		public List<AdminOperationClaim> GetAllByOperationClaim(int operationClaimId);
 		AdminOperationClaim GetById(int id);
-		void Add(AdminOperationClaim adminOperationClaim);
-		void Update(AdminOperationClaim adminOperationClaim);
-		void Delete(AdminOperationClaim adminOperationClaim);
+		AdminOperationClaim Add(AdminOperationClaim adminOperationClaim);
+		AdminOperationClaim Update(AdminOperationClaim adminOperationClaim);
+		AdminOperationClaim Delete(AdminOperationClaim adminOperationClaim);
 	}
 }

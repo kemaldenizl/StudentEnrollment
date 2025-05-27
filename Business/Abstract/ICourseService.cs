@@ -12,8 +12,8 @@ namespace Business.Abstract
 		List<Course> GetAll();
 		public List<Course> GetAllByTeacher(int teacherId);
 		Course GetById(int id);
-		void Add(Course course);
-		void Update(Course course);
-		void Delete(Course course);
+		Course Add(Course course);
+		Course Update(Course course);
+		Course Delete(Course course);
 	}
 }

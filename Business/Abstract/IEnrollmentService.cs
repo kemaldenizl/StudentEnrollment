@@ -13,8 +13,8 @@ namespace Business.Abstract
 		public List<Enrollment> GetAllByStudent(int studentId);
 		public List<Enrollment> GetAllByCourse(int courseId);
 		Enrollment GetById(int id);
-		void Add(Enrollment enrollment);
-		void Update(Enrollment enrollment);
-		void Delete(Enrollment enrollment);
+		Enrollment Add(Enrollment enrollment);
+		Enrollment Update(Enrollment enrollment);
+		Enrollment Delete(Enrollment enrollment);
 	}
 }

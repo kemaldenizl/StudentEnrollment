@@ -14,6 +14,6 @@ namespace Business.Abstract
 		Admin GetByMail(string email);
 		List<Admin> GetAll();
 		Admin Get(int id);
-		void Delete(int id);
+		Admin Delete(int id);
 	}
 }

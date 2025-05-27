@@ -11,8 +11,8 @@ namespace Business.Abstract
 	{
 		List<OperationClaim> GetAll();
 		OperationClaim GetById(int id);
-		void Add(OperationClaim operationClaim);
-		void Update(OperationClaim operationClaim);
-		void Delete(OperationClaim operationClaim);
+		OperationClaim Add(OperationClaim operationClaim);
+		OperationClaim Update(OperationClaim operationClaim);
+		OperationClaim Delete(OperationClaim operationClaim);
 	}
 }

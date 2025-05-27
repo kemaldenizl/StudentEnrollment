@@ -13,8 +13,8 @@ namespace Business.Abstract
 		public List<StudentOperationClaim> GetAllByStudent(int studentId);
 		public List<StudentOperationClaim> GetAllByOperationClaim(int operationClaimId);
 		StudentOperationClaim GetById(int id);
-		void Add(StudentOperationClaim studentOperationClaim);
-		void Update(StudentOperationClaim studentOperationClaim);
-		void Delete(StudentOperationClaim studentOperationClaim);
+		StudentOperationClaim Add(StudentOperationClaim studentOperationClaim);
+		StudentOperationClaim Update(StudentOperationClaim studentOperationClaim);
+		StudentOperationClaim Delete(StudentOperationClaim studentOperationClaim);
 	}
 }
