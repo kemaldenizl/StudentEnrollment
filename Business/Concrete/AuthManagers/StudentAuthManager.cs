@@ -78,10 +78,10 @@ namespace Business.Concrete.AuthManagers
 		{
 			if (_studentService.GetByMail(email) != null)
 			{
-				return false;
+				return true;
 			}
 
-			return true;
+			return false;
 		}
 	}
 }

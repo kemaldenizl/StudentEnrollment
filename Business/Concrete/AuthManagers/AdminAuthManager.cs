@@ -71,10 +71,10 @@ namespace Business.Concrete.AuthManagers
 		{
 			if (_adminService.GetByMail(email) != null)
 			{
-				return false;
+				return true;
 			}
 
-			return true;
+			return false;
 		}
 	}
 }

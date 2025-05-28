@@ -77,10 +77,10 @@ namespace Business.Concrete.AuthManagers
 		{
 			if (_teacherService.GetByMail(email) != null)
 			{
-				return false; //if user exists return false
+				return true; //if user exists return false
 			}
 
-			return true; //if user not exists return true
+			return false; //if user not exists return true
 		}
 	}
 }
