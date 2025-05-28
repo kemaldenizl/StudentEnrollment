@@ -38,6 +38,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPost("register")]
+		[Authorize(Roles = "StudentAuth.Register")]
 		public ActionResult Register([FromBody] StudentRegisterDto studentRegisterDto)
 		{
 			var userExists = _studentAuthService.UserExists(studentRegisterDto.Email); //check if user already exists.

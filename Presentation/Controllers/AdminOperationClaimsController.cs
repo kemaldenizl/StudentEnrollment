@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet()]
+		[Authorize(Roles = "AdminOperationClaim.GetAll")]
 		public IActionResult GetAll()
 		{
 			var result = _adminOperationClaimService.GetAll();
@@ -30,6 +32,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet("getAllByAdmin/{adminId}")]
+		[Authorize(Roles = "AdminOperationClaim.GetAllByAdmin")]
 		public IActionResult GetAllByAdmin(int adminId)
 		{
 			var result = _adminOperationClaimService.GetAllByAdmin(adminId);
@@ -41,6 +44,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet("getAllByOperationClaim/{operationClaimId}")]
+		[Authorize(Roles = "AdminOperationClaim.GetAllByOperationClaim")]
 		public IActionResult GetAllByOperationClaim(int operationClaimId)
 		{
 			var result = _adminOperationClaimService.GetAllByOperationClaim(operationClaimId);
@@ -52,6 +56,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[Authorize(Roles = "AdminOperationClaim.GetById")]
 		public IActionResult GetById(int id)
 		{
 			var result = _adminOperationClaimService.GetById(id);
@@ -63,6 +68,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPost("add")]
+		[Authorize(Roles = "AdminOperationClaim.Add")]
 		public IActionResult Add(AdminOperationClaim adminOperationClaim)
 		{
 			var result = _adminOperationClaimService.Add(adminOperationClaim);
@@ -70,6 +76,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPut("update")]
+		[Authorize(Roles = "AdminOperationClaim.Update")]
 		public IActionResult Update(AdminOperationClaim adminOperationClaim)
 		{
 			var result = _adminOperationClaimService.Update(adminOperationClaim);
@@ -77,6 +84,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpDelete("delete")]
+		[Authorize(Roles = "AdminOperationClaim.Delete")]
 		public IActionResult Delete(AdminOperationClaim adminOperationClaim)
 		{
 			var result = _adminOperationClaimService.Delete(adminOperationClaim);

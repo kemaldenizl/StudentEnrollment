@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet()]
+		[Authorize(Roles = "StudentOperationClaim.GetAll")]
 		public IActionResult GetAll()
 		{
 			var result = _studentOperationClaimService.GetAll();
@@ -29,6 +31,7 @@ namespace Presentation.Controllers
 			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("getAllByStudent/{studentId}")]
+		[Authorize(Roles = "StudentOperationClaim.GetAllByStudent")]
 		public IActionResult GetAllByStudent(int studentId)
 		{
 			var result = _studentOperationClaimService.GetAllByStudent(studentId);
@@ -39,6 +42,7 @@ namespace Presentation.Controllers
 			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("getAllByOperationClaim/{operationClaimId}")]
+		[Authorize(Roles = "StudentOperationClaim.GetAllByOperationClaim")]
 		public IActionResult GetAllByOperationClaim(int operationClaimId)
 		{
 			var result = _studentOperationClaimService.GetAllByOperationClaim(operationClaimId);
@@ -49,6 +53,7 @@ namespace Presentation.Controllers
 			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("{id}")]
+		[Authorize(Roles = "StudentOperationClaim.GetById")]
 		public IActionResult GetById(int id)
 		{
 			var result = _studentOperationClaimService.GetById(id);
@@ -59,12 +64,14 @@ namespace Presentation.Controllers
 			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpPost("add")]
+		[Authorize(Roles = "StudentOperationClaim.Add")]
 		public IActionResult Add(StudentOperationClaim studentOperationClaim)
 		{
 			var result = _studentOperationClaimService.Add(studentOperationClaim);
 			return Ok(result);
 		}
 		[HttpPut("update")]
+		[Authorize(Roles = "StudentOperationClaim.Update")]
 		public IActionResult Update(StudentOperationClaim studentOperationClaim)
 		{
 			var result = _studentOperationClaimService.Update(studentOperationClaim);
@@ -72,6 +79,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpDelete("delete")]
+		[Authorize(Roles = "StudentOperationClaim.Delete")]
 		public IActionResult Delete(StudentOperationClaim studentOperationClaim)
 		{
 			var result = _studentOperationClaimService.Delete(studentOperationClaim);

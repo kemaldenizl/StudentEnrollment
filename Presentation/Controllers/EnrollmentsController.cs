@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet()]
+		[Authorize(Roles = "Enrollment.GetAll")]
 		public IActionResult GetAll()
 		{
 			var result = _enrollmentService.GetAll();
@@ -30,7 +32,8 @@ namespace Presentation.Controllers
 			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("getAllByStudent/{studentId}")]
-		public IActionResult GetEnrollmentsByStudent(int studentId)
+		[Authorize(Roles = "Enrollment.GetAllByStudent")]
+		public IActionResult GetAllByStudent(int studentId)
 		{
 			var result = _enrollmentService.GetAllByStudent(studentId);
 			if (result != null)
@@ -40,7 +43,8 @@ namespace Presentation.Controllers
 			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("getAllByCourse/{courseId}")]
-		public IActionResult GetEnrollmentsByCourse(int courseId)
+		[Authorize(Roles = "Enrollment.GetAllByCourse")]
+		public IActionResult GetAllByCourse(int courseId)
 		{
 			var result = _enrollmentService.GetAllByCourse(courseId);
 			if (result != null)
@@ -51,6 +55,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[Authorize(Roles = "Enrollment.GetById")]
 		public IActionResult GetById(int id)
 		{
 			var result = _enrollmentService.GetById(id);
@@ -62,6 +67,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPost("add")]
+		[Authorize(Roles = "Enrollment.Add")]
 		public IActionResult Add(Enrollment enrollment)
 		{
 			var result = _enrollmentService.Add(enrollment);
@@ -69,6 +75,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPut("update")]
+		[Authorize(Roles = "Enrollment.Update")]
 		public IActionResult Update(Enrollment enrollment)
 		{
 			var result = _enrollmentService.Update(enrollment);
@@ -76,6 +83,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpDelete("delete")]
+		[Authorize(Roles = "Enrollment.Delete")]
 		public IActionResult Delete(Enrollment enrollment)
 		{
 			var result = _enrollmentService.Delete(enrollment);

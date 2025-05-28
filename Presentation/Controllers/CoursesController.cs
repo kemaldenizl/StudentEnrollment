@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet()]
+		[Authorize(Roles = "Course.GetAll")]
 		public IActionResult GetAll()
 		{
 			var result = _courseService.GetAll();
@@ -29,6 +31,7 @@ namespace Presentation.Controllers
 			return NotFound(new ErrorResponse(Messages.DataNotFound));
 		}
 		[HttpGet("getAllByTeacher/{teacherId}")]
+		[Authorize(Roles = "Course.GetAllByTeacher")]
 		public IActionResult GetAllByTeacher(int teacherId)
 		{
 			var result = _courseService.GetAllByTeacher(teacherId);
@@ -40,6 +43,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[Authorize(Roles = "Course.GetById")]
 		public IActionResult GetById(int id)
 		{
 			var result = _courseService.GetById(id);
@@ -51,6 +55,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPost("add")]
+		[Authorize(Roles = "Course.Add")]
 		public IActionResult Add(Course course)
 		{
 			var result = _courseService.Add(course);
@@ -58,6 +63,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPut("update")]
+		[Authorize(Roles = "Course.Update")]
 		public IActionResult Update(Course course)
 		{
 			var result = _courseService.Update(course);
@@ -65,6 +71,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpDelete("delete")]
+		[Authorize(Roles = "Course.Delete")]
 		public IActionResult Delete(Course course)
 		{
 			var result = _courseService.Delete(course);

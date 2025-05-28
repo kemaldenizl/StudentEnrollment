@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Entities.Concrete;
 using Entities.Dtos.LoginDtos;
 using Entities.Dtos.RegisterDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,6 +38,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPost("register")]
+		[Authorize(Roles = "TeacherAuth.Register")]
 		public ActionResult Register([FromBody] TeacherRegisterDto teacherRegisterDto)
 		{
 			var userExists = _teacherAuthService.UserExists(teacherRegisterDto.Email);

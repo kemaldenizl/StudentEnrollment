@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet()]
+		[Authorize(Roles = "OperationClaim.GetAll")]
 		public IActionResult GetAll()
 		{
 			var result = _operationClaimService.GetAll();
@@ -31,6 +33,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[Authorize(Roles = "OperationClaim.GetById")]
 		public IActionResult GetById(int id)
 		{
 			var result = _operationClaimService.GetById(id);
@@ -42,6 +45,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPost("add")]
+		[Authorize(Roles = "OperationClaim.Add")]
 		public IActionResult Add(OperationClaim operationClaim)
 		{
 			var result = _operationClaimService.Add(operationClaim);
@@ -49,6 +53,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPut("update")]
+		[Authorize(Roles = "OperationClaim.Update")]
 		public IActionResult Update(OperationClaim operationClaim)
 		{
 			var result = _operationClaimService.Update(operationClaim);
@@ -56,6 +61,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpDelete("delete")]
+		[Authorize(Roles = "OperationClaim.Delete")]
 		public IActionResult Delete(OperationClaim operationClaim)
 		{
 			var result = _operationClaimService.Delete(operationClaim);
