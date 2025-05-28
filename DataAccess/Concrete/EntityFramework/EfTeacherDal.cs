@@ -25,5 +25,15 @@ namespace DataAccess.Concrete.EntityFramework
 				return result.ToList();
 			}
 		}
+		public bool IsEmailExists(string email)
+		{
+			using (var context = new StudentEnrollmentContext())
+			{
+				var result = context.Admins.Select(a => a.Email)
+					.Union(context.Students.Select(s => s.Email));
+
+				return result.Any(e => e == email);
+			}
+		}
 	}
 }

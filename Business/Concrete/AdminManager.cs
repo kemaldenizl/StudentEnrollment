@@ -60,5 +60,9 @@ namespace Business.Concrete
 			result.PasswordSalt = null;
 			return result;
 		}
+		public bool IsEmailExists(string email)
+		{
+			return _adminDal.IsEmailExists(email);
+		}
 	}
 }

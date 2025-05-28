@@ -69,7 +69,7 @@ namespace Business.Concrete.AuthManagers
 		}
 		public bool UserExists(string email)
 		{
-			if (_adminService.GetByMail(email) != null)
+			if (_adminService.GetByMail(email) != null || _adminService.IsEmailExists(email))
 			{
 				return true;
 			}

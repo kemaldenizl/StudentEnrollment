@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using DataAccess.Concrete.EntityFramework;
 
 namespace Business.Concrete
 {
@@ -58,6 +59,10 @@ namespace Business.Concrete
 			result.PasswordHash = null;
 			result.PasswordSalt = null;
 			return result;
+		}
+		public bool IsEmailExists(string email)
+		{
+			return _teacherDal.IsEmailExists(email);
 		}
 	}
 }

@@ -11,5 +11,6 @@ namespace DataAccess.Abstract
 	public interface ITeacherDal : IEntityRepository<Teacher>
 	{
 		List<OperationClaim> GetClaims(Teacher teacher);
+		bool IsEmailExists(string email);
 	}
 }

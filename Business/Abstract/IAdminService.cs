@@ -15,5 +15,6 @@ namespace Business.Abstract
 		List<Admin> GetAll();
 		Admin Get(int id);
 		Admin Delete(int id);
+		bool IsEmailExists(string email);
 	}
 }
