@@ -81,6 +81,31 @@ namespace Presentation
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentEnrollment API", Version = "v1" });
 				c.SupportNonNullableReferenceTypes();
 				c.OperationFilter<AddRequiredHeaderParameter>();
+
+				c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+				{
+					Name = "Authorization",
+					Type = SecuritySchemeType.Http,
+					Scheme = "bearer",
+					BearerFormat = "JWT",
+					In = ParameterLocation.Header,
+					Description = "Use token with Bearer. Example: Bearer eyJhbGciOiJIUzI1..."
+				});
+
+				c.AddSecurityRequirement(new OpenApiSecurityRequirement
+				{
+					{
+						new OpenApiSecurityScheme
+						{
+							Reference = new OpenApiReference
+							{
+								Type = ReferenceType.SecurityScheme,
+								Id = "Bearer"
+							}
+						},
+						Array.Empty<string>()
+					}
+				});
 			});
 
 			builder.Host
