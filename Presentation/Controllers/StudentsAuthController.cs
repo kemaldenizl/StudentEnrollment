@@ -55,14 +55,7 @@ namespace Presentation.Controllers
 				return BadRequest(new ErrorResponse(Messages.UserNotRegister));
 			}
 
-			var result = _studentAuthService.CreateAccessToken(registerResult); //create access token for the user. 
-
-			if (result != null)
-			{
-				return Ok(result); //if access token created successfully, return Ok with the access token.
-			}
-
-			return BadRequest(new ErrorResponse(Messages.AccessTokenError));
+			return Ok();
 		}
 	}
 }

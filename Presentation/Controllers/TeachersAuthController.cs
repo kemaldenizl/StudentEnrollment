@@ -55,14 +55,7 @@ namespace Presentation.Controllers
 				return BadRequest(new ErrorResponse(Messages.UserNotRegister));
 			}
 
-			var result = _teacherAuthService.CreateAccessToken(registerResult);
-
-			if (result != null)
-			{
-				return Ok(result);
-			}
-
-			return BadRequest(new ErrorResponse(Messages.AccessTokenError));
+			return Ok();
 		}
 	}
 }
