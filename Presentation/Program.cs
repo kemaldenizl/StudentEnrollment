@@ -21,7 +21,7 @@ namespace Presentation
 
 			// Add services to the container.
 
-			var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+			var MyAllowSpecificOrigins = "AllowFrontend";
 
 			builder.Services.AddCors(options =>
 			{
@@ -50,6 +50,18 @@ namespace Presentation
 						ValidIssuer = tokenOptions.Issuer,
 						ValidAudience = tokenOptions.Audience,
 						IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey),
+					};
+					options.Events = new JwtBearerEvents
+					{
+						OnMessageReceived = context =>
+						{
+							context.Request.Cookies.TryGetValue("access_token", out var accessToken);
+							if (!string.IsNullOrEmpty(accessToken))
+							{
+								context.Token = accessToken;
+							}
+							return Task.CompletedTask;
+						}
 					};
 				});
 
@@ -131,7 +143,7 @@ namespace Presentation
 
 			var app = builder.Build();
 
-			app.UseMiddleware<GlobalExceptionMiddleware>();
+			//app.UseMiddleware<GlobalExceptionMiddleware>();
 
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
@@ -142,6 +154,10 @@ namespace Presentation
 
 			//app.UseHttpsRedirection();
 
+
+			app.UseCors(MyAllowSpecificOrigins);
+
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 
