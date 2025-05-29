@@ -21,6 +21,20 @@ namespace Presentation
 
 			// Add services to the container.
 
+			var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+			builder.Services.AddCors(options =>
+			{
+				options.AddPolicy(name: MyAllowSpecificOrigins,
+					policy =>
+					{
+						policy.WithOrigins("http://localhost:3000")
+							.AllowAnyHeader()
+							.AllowAnyMethod()
+							.AllowCredentials();
+					});
+			});
+
 			var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
 			builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -126,7 +140,7 @@ namespace Presentation
 				app.UseSwaggerUI();
 			}
 
-			app.UseHttpsRedirection();
+			//app.UseHttpsRedirection();
 
 			app.UseAuthorization();
 
