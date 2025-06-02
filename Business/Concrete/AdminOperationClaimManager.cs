@@ -12,9 +12,11 @@ namespace Business.Concrete
 	public class AdminOperationClaimManager : IAdminOperationClaimService
 	{
 		public IAdminOperationClaimDal _adminOperationClaimDal;
-		public AdminOperationClaimManager(IAdminOperationClaimDal adminOperationClaimDal)
+		public IAdminService _adminService;
+		public AdminOperationClaimManager(IAdminOperationClaimDal adminOperationClaimDal, IAdminService adminService)
 		{
 			_adminOperationClaimDal = adminOperationClaimDal;
+			_adminService = adminService;
 		}
 		public List<AdminOperationClaim> GetAll()
 		{
@@ -50,6 +52,19 @@ namespace Business.Concrete
 		{
 			var result = _adminOperationClaimDal.Delete(adminOperationClaim);
 			return result;
+		}
+
+		public List<AdminOperationClaim> AddDefaultAdminOperationClaims(int id)
+		{
+			var admin = _adminService.Get(id);
+			List<AdminOperationClaim> results = new List<AdminOperationClaim>();
+			for (int i = 10; i <= 63; i++)
+			{
+				var result = Add(new AdminOperationClaim { AdminId = admin.Id, OperationClaimId = i });
+				results.Add(result);
+			}
+
+			return results;
 		}
 	}
 }

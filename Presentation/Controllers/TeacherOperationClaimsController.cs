@@ -88,5 +88,16 @@ namespace Presentation.Controllers
 			var result = _teacherOperationClaimService.Delete(teacherOperationClaim);
 			return Ok(result);
 		}
+		[HttpPost("addDefaultTeacherOperationClaims/{id}")]
+		[Authorize(Roles = "TeacherOperationClaim.AddDefault")]
+		public IActionResult AddDefaultTeacherOperationClaims(int id)
+		{
+			var result = _teacherOperationClaimService.AddDefaultTeacherOperationClaims(id);
+			if (result.Count > 0)
+			{
+				return Ok(result);
+			}
+			return BadRequest(new ErrorResponse(Messages.DataNotFound));
+		}
 	}
 }

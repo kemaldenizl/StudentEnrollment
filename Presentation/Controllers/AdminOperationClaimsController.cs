@@ -90,5 +90,16 @@ namespace Presentation.Controllers
 			var result = _adminOperationClaimService.Delete(adminOperationClaim);
 			return Ok(result);
 		}
+		[HttpPost("addDefaultAdminOperationClaims/{id}")]
+		[Authorize(Roles = "AdminOperationClaim.AddDefault")]
+		public IActionResult AddDefaultAdminOperationClaims(int id)
+		{
+			var result = _adminOperationClaimService.AddDefaultAdminOperationClaims(id);
+			if (result.Count > 0)
+			{
+				return Ok(result);
+			}
+			return BadRequest(new ErrorResponse(Messages.DataNotFound));
+		}
 	}
 }

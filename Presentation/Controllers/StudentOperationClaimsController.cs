@@ -85,5 +85,16 @@ namespace Presentation.Controllers
 			var result = _studentOperationClaimService.Delete(studentOperationClaim);
 			return Ok(result);
 		}
+		[HttpPost("addDefaultStudentOperationClaims/{id}")]
+		[Authorize(Roles = "StudentOperationClaim.AddDefault")]
+		public IActionResult AddDefaultStudentOperationClaims(int id)
+		{
+			var result = _studentOperationClaimService.AddDefaultStudentOperationClaims(id);
+			if (result.Count > 0)
+			{
+				return Ok(result);
+			}
+			return BadRequest(new ErrorResponse(Messages.DataNotFound));
+		}
 	}
 }

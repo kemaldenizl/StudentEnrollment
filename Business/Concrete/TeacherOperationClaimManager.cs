@@ -12,9 +12,11 @@ namespace Business.Concrete
 	public class TeacherOperationClaimManager : ITeacherOperationClaimService
 	{
 		public ITeacherOperationClaimDal _teacherOperationClaimDal;
-		public TeacherOperationClaimManager(ITeacherOperationClaimDal teacherOperationClaimDal)
+		public ITeacherService _teacherService;
+		public TeacherOperationClaimManager(ITeacherOperationClaimDal teacherOperationClaimDal, ITeacherService teacherService)
 		{
 			_teacherOperationClaimDal = teacherOperationClaimDal;
+			_teacherService = teacherService;
 		}
 		public List<TeacherOperationClaim> GetAll()
 		{
@@ -50,6 +52,27 @@ namespace Business.Concrete
 		{
 			var result = _teacherOperationClaimDal.Delete(teacherOperationClaim);
 			return result;
+		}
+		public List<TeacherOperationClaim> AddDefaultTeacherOperationClaims(int id)
+		{
+			var teacher = _teacherService.Get(id);
+			List<TeacherOperationClaim> results = new List<TeacherOperationClaim>();
+			for (int i = 40; i <= 46; i++)
+			{
+				var result = Add(new TeacherOperationClaim { TeacherId = teacher.Id, OperationClaimId = i });
+				results.Add(result);
+			}
+			var teacherOperationClaim1 = Add(new TeacherOperationClaim { TeacherId = teacher.Id, OperationClaimId = 36 });
+			results.Add(teacherOperationClaim1);
+			var teacherOperationClaim2 = Add(new TeacherOperationClaim { TeacherId = teacher.Id, OperationClaimId = 38 });
+			results.Add(teacherOperationClaim2);
+			var teacherOperationClaim3 = Add(new TeacherOperationClaim { TeacherId = teacher.Id, OperationClaimId = 51 });
+			results.Add(teacherOperationClaim3);
+			var teacherOperationClaim4 = Add(new TeacherOperationClaim { TeacherId = teacher.Id, OperationClaimId = 53 });
+			results.Add(teacherOperationClaim4);
+			var teacherOperationClaim5 = Add(new TeacherOperationClaim { TeacherId = teacher.Id, OperationClaimId = 54 });
+			results.Add(teacherOperationClaim5);
+			return results;
 		}
 	}
 }

@@ -12,9 +12,11 @@ namespace Business.Concrete
 	public class StudentOperationClaimManager : IStudentOperationClaimService
 	{
 		public IStudentOperationClaimDal _studentOperationClaimDal;
-		public StudentOperationClaimManager(IStudentOperationClaimDal studentOperationClaimDal)
+		public IStudentService _studentService;
+		public StudentOperationClaimManager(IStudentOperationClaimDal studentOperationClaimDal, IStudentService studentService)
 		{
 			_studentOperationClaimDal = studentOperationClaimDal;
+			_studentService = studentService;
 		}
 
 		public List<StudentOperationClaim> GetAll()
@@ -51,6 +53,19 @@ namespace Business.Concrete
 		{
 			var result = _studentOperationClaimDal.Delete(studentOperationClaim);
 			return result;
+		}
+
+		public List<StudentOperationClaim> AddDefaultStudentOperationClaims(int id)
+		{
+			var student = _studentService.Get(id);
+			List<StudentOperationClaim> results = new List<StudentOperationClaim>();
+			for (int i = 37; i <= 53; i= i + 8)
+			{
+				var result = Add(new StudentOperationClaim { StudentId = student.Id, OperationClaimId = i });
+				results.Add(result);
+			}
+
+			return results;
 		}
 	}
 }
