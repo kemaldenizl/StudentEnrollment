@@ -101,5 +101,18 @@ namespace Presentation.Controllers
 			}
 			return BadRequest(new ErrorResponse(Messages.DataNotFound));
 		}
+
+		[HttpDelete("deleteAllByAdmin/{id}")]
+		[Authorize(Roles = "AdminOperationClaim.DeleteAllByAdmin")]
+		public IActionResult DeleteAllByAdmin(int id)
+		{
+			var result = _adminOperationClaimService.DeleteAllByAdmin(id);
+			if (result != null)
+			{
+				return Ok(result);
+			}
+
+			return BadRequest(new ErrorResponse(Messages.DataNotFound));
+		}
 	}
 }

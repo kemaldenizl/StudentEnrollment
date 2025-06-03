@@ -17,5 +17,6 @@ namespace Business.Abstract
 		TeacherOperationClaim Update(TeacherOperationClaim teacherOperationClaim);
 		TeacherOperationClaim Delete(TeacherOperationClaim teacherOperationClaim);
 		List<TeacherOperationClaim> AddDefaultTeacherOperationClaims(int id);
+		List<TeacherOperationClaim> DeleteAllByTeacher(int id);
 	}
 }

@@ -66,5 +66,16 @@ namespace Business.Concrete
 
 			return results;
 		}
+
+		public List<AdminOperationClaim> DeleteAllByAdmin(int id)
+		{
+			var claims = GetAllByAdmin(id);
+			foreach (var claim in claims)
+			{
+				var result = Delete(claim);
+			}
+
+			return claims;
+		}
 	}
 }

@@ -67,5 +67,15 @@ namespace Business.Concrete
 
 			return results;
 		}
+		public List<StudentOperationClaim> DeleteAllByStudent(int id)
+		{
+			var claims = GetAllByStudent(id);
+			foreach (var claim in claims)
+			{
+				var result = Delete(claim);
+			}
+
+			return claims;
+		}
 	}
 }

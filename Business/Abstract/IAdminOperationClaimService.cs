@@ -17,5 +17,6 @@ namespace Business.Abstract
 		AdminOperationClaim Update(AdminOperationClaim adminOperationClaim);
 		AdminOperationClaim Delete(AdminOperationClaim adminOperationClaim);
 		List<AdminOperationClaim> AddDefaultAdminOperationClaims(int id);
+		List<AdminOperationClaim> DeleteAllByAdmin(int id);
 	}
 }

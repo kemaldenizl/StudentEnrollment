@@ -99,5 +99,17 @@ namespace Presentation.Controllers
 			}
 			return BadRequest(new ErrorResponse(Messages.DataNotFound));
 		}
+		[HttpDelete("deleteAllByTeacher/{id}")]
+		[Authorize(Roles = "TeacherOperationClaim.DeleteAllByTeacher")]
+		public IActionResult DeleteAllByTeacher(int id)
+		{
+			var result = _teacherOperationClaimService.DeleteAllByTeacher(id);
+			if (result != null)
+			{
+				return Ok(result);
+			}
+
+			return BadRequest(new ErrorResponse(Messages.DataNotFound));
+		}
 	}
 }

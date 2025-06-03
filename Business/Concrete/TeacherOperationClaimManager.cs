@@ -74,5 +74,15 @@ namespace Business.Concrete
 			results.Add(teacherOperationClaim5);
 			return results;
 		}
+		public List<TeacherOperationClaim> DeleteAllByTeacher(int id)
+		{
+			var claims = GetAllByTeacher(id);
+			foreach (var claim in claims)
+			{
+				var result = Delete(claim);
+			}
+
+			return claims;
+		}
 	}
 }
