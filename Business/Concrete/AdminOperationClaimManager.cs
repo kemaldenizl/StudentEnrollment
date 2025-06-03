@@ -58,7 +58,7 @@ namespace Business.Concrete
 		{
 			var admin = _adminService.Get(id);
 			List<AdminOperationClaim> results = new List<AdminOperationClaim>();
-			for (int i = 10; i <= 63; i++)
+			for (int i = 10; i <= 66; i++)
 			{
 				var result = Add(new AdminOperationClaim { AdminId = admin.Id, OperationClaimId = i });
 				results.Add(result);
