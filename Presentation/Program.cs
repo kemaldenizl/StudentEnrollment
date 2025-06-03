@@ -150,6 +150,7 @@ namespace Presentation
 			{
 				app.UseSwagger();
 				app.UseSwaggerUI();
+				app.UseDeveloperExceptionPage();
 			}
 
 			//app.UseHttpsRedirection();

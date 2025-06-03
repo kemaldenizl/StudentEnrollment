@@ -55,7 +55,7 @@ namespace Presentation.Controllers
 				return BadRequest(new ErrorResponse(Messages.UserNotRegister));
 			}
 
-			return Ok();
+			return Ok(registerResult);
 		}
 	}
 }
