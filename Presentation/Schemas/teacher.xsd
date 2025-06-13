@@ -2,14 +2,14 @@
   <xs:element name="Teacher">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="Id" type="xs:int"/>
-        <xs:element name="FirstName" type="xs:string"/>
-        <xs:element name="LastName" type="xs:string"/>
-        <xs:element name="Email" type="xs:string"/>
-        <xs:element name="PasswordHash" type="xs:base64Binary"/>
-        <xs:element name="PasswordSalt" type="xs:base64Binary"/>
-        <xs:element name="HireDate" type="xs:dateTime"/>
-        <xs:element name="Department" type="xs:string"/>
+        <xs:element name="id" type="xs:int" minOccurs="0"/>
+        <xs:element name="firstName" type="xs:string"/>
+        <xs:element name="lastName" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="passwordHash" type="xs:base64Binary"/>
+        <xs:element name="passwordSalt" type="xs:base64Binary"/>
+        <xs:element name="hireDate" type="xs:dateTime"/>
+        <xs:element name="department" type="xs:string"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -144,6 +144,7 @@ namespace Presentation
 			var app = builder.Build();
 
 			app.UseMiddleware<GlobalExceptionMiddleware>();
+			app.UseXsdValidation();
 
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())

@@ -5,6 +5,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Middlewares;
 
 namespace Presentation.Controllers
 {
@@ -68,6 +69,7 @@ namespace Presentation.Controllers
 
 		[HttpPost("add")]
 		[Authorize(Roles = "Enrollment.Add")]
+		[XsdValidation("Schemas/enrollment.xsd")]
 		public IActionResult Add(Enrollment enrollment)
 		{
 			var result = _enrollmentService.Add(enrollment);
@@ -76,6 +78,7 @@ namespace Presentation.Controllers
 
 		[HttpPut("update")]
 		[Authorize(Roles = "Enrollment.Update")]
+		[XsdValidation("Schemas/enrollment.xsd")]
 		public IActionResult Update(Enrollment enrollment)
 		{
 			var result = _enrollmentService.Update(enrollment);
@@ -84,6 +87,7 @@ namespace Presentation.Controllers
 
 		[HttpDelete("delete")]
 		[Authorize(Roles = "Enrollment.Delete")]
+		[XsdValidation("Schemas/enrollment.xsd")]
 		public IActionResult Delete(Enrollment enrollment)
 		{
 			var result = _enrollmentService.Delete(enrollment);
