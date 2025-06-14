@@ -22,4 +22,16 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Schemas\adminLogin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Schemas\studentLogin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Schemas\teacherLogin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+
 </Project>

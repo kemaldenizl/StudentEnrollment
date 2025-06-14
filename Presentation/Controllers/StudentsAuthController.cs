@@ -6,6 +6,7 @@ using Entities.Dtos.RegisterDtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Middlewares;
 
 namespace Presentation.Controllers
 {
@@ -21,6 +22,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPost("login")]
+		[XsdValidation("Schemas/studentLogin.xsd")]
 		public ActionResult Login([FromBody] StudentLoginDto studentLoginDto)
 		{
 			var userToLogin = _studentAuthService.Login(studentLoginDto); //Users information send to login service.
@@ -39,6 +41,7 @@ namespace Presentation.Controllers
 
 		[HttpPost("register")]
 		[Authorize(Roles = "StudentAuth.Register")]
+		[XsdValidation("Schemas/studentRegister.xsd")]
 		public ActionResult Register([FromBody] StudentRegisterDto studentRegisterDto)
 		{
 			var userExists = _studentAuthService.UserExists(studentRegisterDto.Email); //check if user already exists.

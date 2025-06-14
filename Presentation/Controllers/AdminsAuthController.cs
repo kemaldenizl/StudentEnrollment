@@ -6,6 +6,7 @@ using Entities.Dtos.RegisterDtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Middlewares;
 
 namespace Presentation.Controllers
 {
@@ -22,6 +23,7 @@ namespace Presentation.Controllers
 		}
 
 		[HttpPost("login")]
+		[XsdValidation("Schemas/adminLogin.xsd")]
 		public ActionResult Login([FromBody] AdminLoginDto adminLoginDto)
 		{
 			var userToLogin = _adminAuthService.Login(adminLoginDto);
@@ -40,6 +42,7 @@ namespace Presentation.Controllers
 
 		[HttpPost("register")]
 		[Authorize(Roles = "AdminAuth.Register")]
+		[XsdValidation("Schemas/adminRegister.xsd")]
 		public ActionResult Register([FromBody] AdminRegisterDto adminRegisterDto)
 		{
 			var userExists = _adminAuthService.UserExists(adminRegisterDto.Email);
