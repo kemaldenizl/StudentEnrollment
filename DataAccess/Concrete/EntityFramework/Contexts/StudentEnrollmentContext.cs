@@ -14,7 +14,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Server=DESKTOP-3C9L670;Database=StudentEnrollment;Trusted_Connection=true;TrustServerCertificate=True");
-			//this connection string is temporarily here. After testing api this connection string will go to appsettings.json file.
 		}
 		public DbSet<Teacher> Teachers { get; set; }
 		public DbSet<TeacherOperationClaim> TeacherOperationClaims { get; set; }
